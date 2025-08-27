@@ -102,11 +102,13 @@
     <!-- Sticky Navigation -->
     <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center h-16 space-x-4 md:space-x-10 text-sm md:text-base">
+            <div class="flex items-center justify-center h-16 space-x-4 md:space-x-8 text-sm md:text-base">
                 <a href="#paradigm-shift" class="nav-link text-gray-400 hover:text-white">Shift</a>
                 <a href="#engine-of-scale" class="nav-link text-gray-400 hover:text-white">Scale</a>
+                <a href="#adapting-not-building" class="nav-link text-gray-400 hover:text-white">Adapting</a>
                 <a href="#inverted-workflow" class="nav-link text-gray-400 hover:text-white">Workflow</a>
                 <a href="#use-cases" class="nav-link text-gray-400 hover:text-white">Use Cases</a>
+                <a href="#ai-engineer-role" class="nav-link text-gray-400 hover:text-white">Your Role</a>
                 <a href="#planning" class="nav-link text-gray-400 hover:text-white">Planning</a>
                 <a href="#takeaways" class="nav-link text-gray-400 hover:text-white">Takeaways</a>
             </div>
@@ -165,7 +167,74 @@
             </div>
         </section>
 
-        <!-- Section 3: The Inverted Workflow -->
+        <!-- Section 3: The New Job: Adapting, Not Building -->
+        <section id="adapting-not-building" class="section">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-12 animated">The New Job: Adapting, Not Building</h2>
+                <div class="max-w-5xl w-full">
+                    <div class="card animated mb-8" style="transition-delay: 100ms;">
+                        <p class="text-lg text-center text-gray-300 mb-6">Since we don't pre-train foundation models (it's too expensive), the work of an AI Engineer is <span class="text-indigo-400 font-semibold">model adaptation</span>.</p>
+                    </div>
+                    
+                    <!-- Adaptation Techniques Tabs -->
+                    <div class="bg-gray-800 rounded-lg p-6 animated" style="transition-delay: 200ms;">
+                        <div class="flex justify-center space-x-2 mb-6">
+                            <button class="tab active" data-tab="prompt">Prompt-based</button>
+                            <button class="tab" data-tab="finetuning">Finetuning</button>
+                        </div>
+                        
+                        <div id="prompt" class="tab-content active">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-gray-900 p-6 rounded-lg">
+                                    <h4 class="text-xl font-semibold text-indigo-400 mb-3">Prompt Engineering</h4>
+                                    <p class="text-gray-300 mb-4">Giving the model clear instructions and context. This is the starting point for almost every application.</p>
+                                    <div class="bg-gray-800 p-4 rounded text-sm font-mono">
+                                        <span class="text-green-400">System:</span> You are a helpful assistant...<br>
+                                        <span class="text-blue-400">User:</span> Analyze this data...
+                                    </div>
+                                </div>
+                                <div class="bg-gray-900 p-6 rounded-lg">
+                                    <h4 class="text-xl font-semibold text-indigo-400 mb-3">Retrieval-Augmented Generation (RAG)</h4>
+                                    <p class="text-gray-300 mb-4">Giving the model external, up-to-date knowledge to draw from (e.g., a database of your company's documents).</p>
+                                    <div class="bg-gray-800 p-4 rounded text-sm">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            <span class="text-gray-300">Query → Retrieve → Generate</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="finetuning" class="tab-content">
+                            <div class="bg-gray-900 p-6 rounded-lg">
+                                <h4 class="text-xl font-semibold text-indigo-400 mb-3">Finetuning (Weight Changes)</h4>
+                                <p class="text-gray-300 mb-4">Further training a pre-trained model on a smaller, domain-specific dataset to specialize its behavior, style, or knowledge.</p>
+                                <div class="bg-gray-800 p-4 rounded">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-300">Foundation Model</span>
+                                        <span class="text-indigo-400">→</span>
+                                        <span class="text-gray-300">Domain Data</span>
+                                        <span class="text-indigo-400">→</span>
+                                        <span class="text-green-400">Specialized Model</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-2">Higher cost and complexity, but better performance for specific tasks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <blockquote class="quote max-w-4xl mt-8 mx-auto animated" style="transition-delay: 300ms;">
+                        <p>"AI engineering is the process of building applications on top of readily available models, rather than building models from scratch."</p>
+                        <footer class="text-right mt-2 text-gray-500">- Huyen (2025, p. 1)</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Inverted Workflow -->
         <section id="inverted-workflow" class="section">
              <div class="text-center">
                 <h2 class="text-3xl font-bold mb-12 animated">The Inverted Workflow</h2>
@@ -221,7 +290,80 @@
             </div>
         </section>
 
-        <!-- Section 5: Planning -->
+        <!-- Section 6: Your Role as an AI Engineer -->
+        <section id="ai-engineer-role" class="section">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-12 animated">Your Role as an AI Engineer</h2>
+                <div class="max-w-5xl w-full space-y-8">
+                    <div class="card animated" style="transition-delay: 100ms;">
+                        <h3 class="text-2xl font-semibold text-center mb-6 text-indigo-400">Focus on the Application Layer</h3>
+                        <p class="text-lg text-center text-gray-300 mb-6">Most of your work will live in the "Application Development" layer of the stack: prompt engineering, context construction (RAG), and building user interfaces.</p>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <svg class="w-8 h-8 text-indigo-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                                </svg>
+                                <p class="font-semibold">Prompt Engineering</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <svg class="w-8 h-8 text-indigo-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                                </svg>
+                                <p class="font-semibold">Context Construction (RAG)</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg text-center">
+                                <svg class="w-8 h-8 text-indigo-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="font-semibold">User Interfaces</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card animated" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-semibold text-center mb-6 text-red-400">Evaluation is Your Biggest Challenge</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <h4 class="text-lg font-semibold text-green-400 mb-3">Traditional ML Evaluation</h4>
+                                <p class="text-gray-300">Straightforward metrics like accuracy, precision, recall on classification tasks.</p>
+                                <div class="mt-3 text-sm font-mono bg-gray-900 p-2 rounded">
+                                    accuracy = 92.5%
+                                </div>
+                            </div>
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <h4 class="text-lg font-semibold text-red-400 mb-3">Generative AI Evaluation</h4>
+                                <p class="text-gray-300">How do you programmatically evaluate if generated content is "good," "creative," or "on-brand"?</p>
+                                <div class="mt-3 text-sm text-gray-400">
+                                    ❓ Much harder problem
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center mt-6 text-lg text-gray-300">This is a central focus of AI Engineering and a rapidly evolving area.</p>
+                    </div>
+
+                    <div class="card animated" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-semibold text-center mb-6 text-yellow-400">Master the Tradeoffs</h3>
+                        <p class="text-lg text-center text-gray-300 mb-6">Your job isn't just to build, but to decide <em>how</em>. You'll constantly be asking:</p>
+                        <div class="space-y-4">
+                            <div class="bg-gray-800 p-4 rounded-lg">
+                                <p class="text-center text-gray-300">"Is prompt engineering sufficient, or do we need RAG?"</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg">
+                                <p class="text-center text-gray-300">"When is the cost and complexity of finetuning justified?"</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg">
+                                <p class="text-center text-gray-300">"Which model provider gives the best performance/cost/latency for our specific use case?"</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <p class="text-lg text-indigo-400 font-semibold">Performance ⚖️ Cost ⚖️ Latency</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Planning -->
         <section id="planning" class="section">
             <div class="text-center">
                 <h2 class="text-3xl font-bold mb-12 animated">The Blueprint: Planning Your AI Application</h2>
@@ -268,10 +410,34 @@
             <div class="text-center">
                 <h2 class="text-3xl font-bold mb-12 animated">Key Takeaways</h2>
                 <div class="max-w-4xl w-full space-y-6">
-                    <div class="card animated" style="transition-delay: 100ms;"><p class="text-lg text-center">1. <span class="font-semibold text-indigo-400">Self-Supervision Unlocked Scale:</span> This is the key technical innovation that enabled today's massive foundation models.</p></div>
-                    <div class="card animated" style="transition-delay: 200ms;"><p class="text-lg text-center">2. <span class="font-semibold text-indigo-400">The Workflow is Inverted:</span> AI Engineering is product-first, enabling rapid iteration (`Product -> Data -> Model`).</p></div>
-                    <div class="card animated" style="transition-delay: 300ms;"><p class="text-lg text-center">3. <span class="font-semibold text-indigo-400">Evaluation is the Core Challenge:</span> Measuring the quality of open-ended, generative outputs is the hardest part of the job.</p></div>
-                    <div class="card animated" style="transition-delay: 400ms;"><p class="text-lg text-center">4. <span class="font-semibold text-indigo-400">Plan Strategically:</span> Go beyond the demo by evaluating the "why," defining the human-AI role, and setting clear metrics from the start.</p></div>
+                    <div class="card animated" style="transition-delay: 100ms;">
+                        <p class="text-lg text-center">1. <span class="font-semibold text-indigo-400">Self-Supervision Unlocked Scale:</span> This is the key technical innovation that enabled today's massive foundation models.</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 200ms;">
+                        <p class="text-lg text-center">2. <span class="font-semibold text-indigo-400">AI Engineering is Model Adaptation:</span> Focus on prompt engineering, RAG, and finetuning rather than building models from scratch.</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 300ms;">
+                        <p class="text-lg text-center">3. <span class="font-semibold text-indigo-400">The Workflow is Inverted:</span> AI Engineering is product-first, enabling rapid iteration (`Product → Data → Model`).</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 400ms;">
+                        <p class="text-lg text-center">4. <span class="font-semibold text-indigo-400">Your Role: Application Layer + Evaluation:</span> Focus on user interfaces, context construction, and solving the challenge of evaluating generative outputs.</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 500ms;">
+                        <p class="text-lg text-center">5. <span class="font-semibold text-indigo-400">Master the Tradeoffs:</span> Balance performance, cost, and latency across different adaptation techniques and model providers.</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 600ms;">
+                        <p class="text-lg text-center">6. <span class="font-semibold text-indigo-400">Plan Strategically:</span> Go beyond the demo by evaluating the "why," defining the human-AI role, and setting clear metrics from the start.</p>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="mt-12 card bg-indigo-900/30 border-indigo-500 animated" style="transition-delay: 700ms;">
+                    <h3 class="text-xl font-semibold text-center text-white mb-4">Next Steps for AI Engineering Interns</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="text-center">📖 <strong>Read Chapter 1 in full</strong> - Deepen your understanding of the concepts covered today</p>
+                        <p class="text-center">💡 <strong>Think Product-First</strong> - Consider a potential project idea and how the `Product → Data → Model` workflow would change your approach</p>
+                        <p class="text-center">🔍 <strong>Practice Evaluation</strong> - Start thinking about how you would measure success for open-ended, generative AI applications</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -312,6 +478,28 @@
                 });
             }, { rootMargin: '-50% 0px -50% 0px' });
             sections.forEach(sec => navObserver.observe(sec));
+
+            // Tab functionality for adaptation techniques
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    const targetTab = tab.dataset.tab;
+                    const targetContent = document.getElementById(targetTab);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
 
             // Crawl-Walk-Run interactive element
             const cwrStages = document.querySelectorAll('.cwr-stage');
