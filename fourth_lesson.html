@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluate AI Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #60a5fa;
+            --background-color: #030712;
+            --content-bg-color: #111827;
+            --border-color: #374151;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: #d1d5db;
+        }
+        .main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .main-content::-webkit-scrollbar-track {
+            background: var(--content-bg-color);
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 10px;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 80ch;
+        }
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: background-color 0.2s, color 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-link:hover {
+            background-color: rgba(96, 165, 250, 0.1);
+            color: var(--text-primary);
+        }
+        .nav-link.active {
+            color: var(--accent-color);
+            font-weight: 600;
+            border-left-color: var(--accent-color);
+            background-color: rgba(96, 165, 250, 0.05);
+        }
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .critical-note {
+            background-color: #450a0a;
+            border-left: 4px solid #f87171;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.25rem;
+        }
+        .quote {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            background-color: #1f2937;
+            border-radius: 0.25rem;
+        }
+        .quote p {
+            font-style: italic;
+            color: #d1d5db;
+        }
+        .quote-citation {
+            text-align: right;
+            font-style: normal;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-64 flex-shrink-0 bg-gray-900/30 p-4 fixed lg:sticky top-0 h-screen -translate-x-full lg:translate-x-0 transition-transform z-20">
+            <h1 class="text-xl font-bold text-white mb-6 px-4">Evaluation Guide</h1>
+            <nav id="desktop-nav" class="space-y-2">
+                <a href="#introduction" class="nav-link">Introduction</a>
+                <a href="#philosophy" class="nav-link">Core Philosophy</a>
+                <a href="#pillars" class="nav-link">Four Pillars of Evaluation</a>
+                <a href="#workflow" class="nav-link">Model Selection Workflow</a>
+                <a href="#step1" class="nav-link">Step 1: Build vs. Buy</a>
+                <a href="#step2" class="nav-link">Step 2: Public Benchmarks</a>
+                <a href="#step3" class="nav-link">Step 3: Custom Pipeline</a>
+                <a href="#takeaways" class="nav-link">Key Takeaways</a>
+                <a href="#reference" class="nav-link">Reference</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-1 p-6 md:p-10 lg:p-16 bg-gray-900/50 overflow-y-auto h-screen">
+            <div class="max-w-4xl mx-auto space-y-20">
+                
+                <section id="introduction">
+                    <h1 class="text-5xl font-extrabold text-white leading-tight">Evaluating Modern AI Systems</h1>
+                    <p class="mt-4 text-xl text-gray-400">A study guide for AI Engineering Interns based on Chapter 4 of "AI Engineering".</p>
+                </section>
+
+                <section id="philosophy">
+                    <h2 class="section-title">The Core Philosophy</h2>
+                    <p class="section-subtitle">The single biggest bottleneck to AI adoption is reliable evaluation.</p>
+                    <div class="text-center bg-gray-800 p-8 rounded-lg">
+                        <p class="text-xl">We will adopt the principle of <span class="highlight text-2xl">Evaluation-Driven Development</span>.</p>
+                        <p class="mt-4 text-gray-400 max-w-2xl mx-auto">This means defining how you will measure success <span class="font-bold text-white">before</span> you start building. An application that is deployed but cannot be evaluated is a liability—it costs resources without providing knowable value.</p>
+                    </div>
+                    <blockquote class="quote">
+                        <p>"In AI engineering, evaluation-driven development means defining evaluation criteria before building."</p>
+                        <footer class="quote-citation">&mdash; Huyen (2025, p. 160)</footer>
+                    </blockquote>
+                </section>
+                
+                <section id="pillars">
+                    <h2 class="section-title">The Four Pillars of Evaluation</h2>
+                    <p class="section-subtitle">A comprehensive evaluation looks beyond simple accuracy.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="font-semibold text-white text-xl mb-2">1. Domain-Specific Capability</h3>
+                            <p class="text-gray-400">Does the model understand the subject matter (e.g., code, law)?</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="font-semibold text-white text-xl mb-2">2. Generation Capability</h3>
+                            <p class="text-gray-400">How good is the quality of the open-ended output (e.g., factual, safe)?</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="font-semibold text-white text-xl mb-2">3. Instruction-Following</h3>
+                            <p class="text-gray-400">Can the model adhere to specific constraints and formats?</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="font-semibold text-white text-xl mb-2">4. Cost and Latency</h3>
+                            <p class="text-gray-400">Is the model fast and affordable enough for the use case?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="workflow">
+                    <h2 class="section-title">The Model Selection Workflow</h2>
+                    <p class="section-subtitle">A systematic process to find the right model for <span class="highlight">your</span> application.</p>
+                    <div class="flex flex-col md:flex-row justify-between items-center text-center text-white space-y-4 md:space-y-0 md:space-x-2">
+                        <div class="w-full md:w-1/4 p-3 bg-gray-800 rounded-lg"><div class="text-blue-400 font-bold mb-1">STEP 1</div><div>Filter by Build vs. Buy</div></div>
+                        <div class="text-gray-500 font-bold text-2xl">&darr;</div>
+                        <div class="w-full md:w-1/4 p-3 bg-gray-800 rounded-lg"><div class="text-blue-400 font-bold mb-1">STEP 2</div><div>Navigate Public Benchmarks</div></div>
+                        <div class="text-gray-500 font-bold text-2xl">&darr;</div>
+                        <div class="w-full md:w-1/4 p-3 bg-gray-800 rounded-lg"><div class="text-blue-400 font-bold mb-1">STEP 3</div><div>Design Custom Pipeline</div></div>
+                        <div class="text-gray-500 font-bold text-2xl">&darr;</div>
+                        <div class="w-full md:w-1/4 p-3 bg-gray-800 rounded-lg"><div class="text-blue-400 font-bold mb-1">STEP 4</div><div>Monitor in Production</div></div>
+                    </div>
+                </section>
+
+                <section id="step1">
+                    <h2 class="section-title">Step 1: The Build vs. Buy Decision</h2>
+                    <p class="section-subtitle">This is your first, most critical filter. Should you self-host an open-source model or use a commercial API?</p>
+                    <ul class="list-disc pl-5 space-y-3 text-lg">
+                        <li><span class="highlight">Data Privacy:</span> Can data leave your network? Self-hosting provides maximum privacy.</li>
+                        <li><span class="highlight">Performance:</span> The absolute SOTA models are often proprietary APIs, but the gap is closing.</li>
+                        <li><span class="highlight">Functionality & Control:</span> Need to modify architecture or guarantee version stability? Self-hosting offers more control.</li>
+                        <li><span class="highlight">Cost at Scale:</span> APIs are pay-per-use; self-hosting has high upfront engineering costs but can be cheaper at massive scale.</li>
+                        <li><span class="highlight">Data Lineage & IP Risk:</span> Who is liable if the model was trained on copyrighted data? Commercial contracts may offer indemnification.</li>
+                    </ul>
+                     <blockquote class="quote">
+                        <p>"A 2024 study by a16z shows two key reasons that enterprises care about open source models are control and customizability..."</p>
+                        <footer class="quote-citation">&mdash; Huyen (2025, p. 189)</footer>
+                    </blockquote>
+                </section>
+                
+                <section id="step2">
+                    <h2 class="section-title">Step 2: Navigate Public Benchmarks</h2>
+                    <p class="section-subtitle">Use leaderboards to create a shortlist of promising models.</p>
+                    <div class="bg-gray-800 p-6 rounded-lg text-lg">
+                        Their purpose is to give you a directional sense of a model's general capabilities in areas like reasoning (MMLU), math (GSM-8K), or coding (HumanEval).
+                        <div class="critical-note">
+                            <h3 class="font-bold text-red-300">CRITICAL CAVEAT: Data Contamination</h3>
+                            <p class="text-red-200 mt-2">"Data contamination happens when a model was trained on the same data it’s evaluated on... causing it to achieve higher evaluation scores than it should" <span class="font-normal not-italic">(Huyen, 2025, p. 197)</span>. Never trust public benchmarks as the sole source of truth.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="step3">
+                    <h2 class="section-title">Step 3: Design Your Custom Pipeline</h2>
+                    <p class="section-subtitle">This is where real engineering happens. Build a reliable, application-specific evaluation process.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg">
+                        <div>
+                            <h3 class="font-semibold text-white text-xl mb-2">1. Create a Clear Guideline</h3>
+                            <ul class="list-disc pl-5 space-y-2">
+                               <li>Define what a "good" response is, not just a "correct" one.</li>
+                               <li>Create detailed scoring rubrics with concrete examples.</li>
+                               <li>Tie technical metrics (e.g., accuracy) to business metrics (e.g., time saved).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white text-xl mb-2">2. Define Methods & Data</h3>
+                             <ul class="list-disc pl-5 space-y-2">
+                               <li>Curate an evaluation set from real user data.</li>
+                               <li>Use AI judges, specialized classifiers, or human experts.</li>
+                               <li><span class="highlight">Slice your data</span> to test performance on critical subsets (e.g., high-value users, edge cases). This helps avoid Simpson's Paradox.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <blockquote class="quote">
+                        <p>"A correct response is not always a good response. For example, for their AI-powered Job Assessment application, the response 'You are a terrible fit' might be correct but not helpful, thus making it a bad response."</p>
+                        <footer class="quote-citation">&mdash; Huyen (2025, p. 202)</footer>
+                    </blockquote>
+                </section>
+                
+                <section id="takeaways">
+                    <h2 class="section-title">Key Takeaways</h2>
+                     <div class="bg-gray-800 p-8 rounded-lg text-lg">
+                        <ul class="list-disc pl-5 space-y-4">
+                            <li>Adopt <span class="highlight">Evaluation-Driven Development</span>. Define success before you build.</li>
+                            <li>The <span class="highlight">Build vs. Buy</span> decision is a strategic one that depends on privacy, control, and cost.</li>
+                            <li>Use public benchmarks for initial filtering but <span class="highlight">do not trust them blindly</span> due to data contamination.</li>
+                            <li>The reliability of your AI application is determined by the quality of your <span class="highlight">custom evaluation pipeline</span>. This is your source of truth.</li>
+                        </ul>
+                    </div>
+                     <blockquote class="quote">
+                        <p>"Not having a reliable evaluation pipeline is one of the biggest blocks to AI adoption."</p>
+                        <footer class="quote-citation">&mdash; Huyen (2025, p. 208)</footer>
+                    </blockquote>
+                </section>
+
+                <section id="reference" class="pb-16">
+                    <h2 class="section-title">Reference</h2>
+                    <div class="text-center text-lg mt-8">
+                        <p>The content of this guide is based on Chapter 4: Evaluate AI Systems from:</p>
+                        <p class="mt-8 italic bg-gray-800 p-6 rounded-lg border border-gray-700">Huyen, C. (2025). <span class="font-semibold not-italic">AI engineering: Building applications with foundation models.</span> O'Reilly Media.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="lg:hidden fixed bottom-4 right-4 bg-accent-color text-white p-3 rounded-full shadow-lg z-30">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a');
+            const mainContent = document.getElementById('main-content');
+            const menuBtn = document.getElementById('menu-btn');
+            const sidebar = document.getElementById('sidebar');
+
+            // Mobile menu toggle
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            // Close sidebar when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 1024) { // lg breakpoint
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { root: mainContent, rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
