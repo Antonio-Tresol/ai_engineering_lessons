@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Prompt Engineering Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .key-quote {
+            background-color: #1F2937; /* bg-gray-800 */
+            border-left: 4px solid #3B82F6; /* border-blue-500 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        .nav-link.active {
+            color: #60A5FA; /* text-blue-400 */
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #60A5FA; /* bg-blue-400 */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Sticky Header/Menu -->
+    <header class="sticky top-0 bg-gray-800/90 backdrop-blur-sm shadow-lg z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16">
+                <div class="flex items-center">
+                    <div class="hidden md:block">
+                        <div id="nav-menu" class="ml-10 flex items-baseline space-x-4">
+                            <!-- Menu items will be dynamically generated here but added statically for clarity -->
+                            <a href="#section-1" data-section="section-1" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Title</a>
+                            <a href="#section-2" data-section="section-2" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Introduction</a>
+                            <a href="#section-3" data-section="section-3" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Best Practices</a>
+                            <a href="#section-4" data-section="section-4" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Threats</a>
+                            <a href="#section-5" data-section="section-5" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Attack Vectors</a>
+                            <a href="#section-6" data-section="section-6" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Defense</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-4 md:p-8">
+        <!-- Section 1: Title -->
+        <section id="section-1" class="min-h-screen flex flex-col items-center justify-center text-center py-20">
+            <div class="mt-12 text-lg text-gray-400">
+                <p><strong></strong> Chapter 5: Prompt Engineering</p>
+                <p><strong>Source:</strong> Huyen, C. (2025). AI Engineering: Building applications with foundation models.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Introduction -->
+        <section id="section-2" class="py-20 border-t border-gray-700">
+            <h2 class="text-3xl font-bold text-blue-400 mb-8">1. Introduction: The Art and Science of Prompting</h2>
+            <div class="space-y-8 text-gray-300">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">What is Prompt Engineering?</h3>
+                    <p class="key-quote">"Prompt engineering refers to the process of crafting an instruction that gets a model to generate the desired outcome... You can think of prompt engineering as human-to-AI communication..." (Huyen, 2025, p. 211).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Anatomy of a Prompt & In-Context Learning (ICL)</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Core parts: Task description, examples, the task itself.</li>
+                        <li>ICL allows models to learn from examples in the prompt without updating weights.</li>
+                        <li>Zero-Shot vs. Few-Shot: Powerful models may need fewer examples.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">System vs. User Prompts & Context Efficiency</h3>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li><strong>System Prompt:</strong> Defines persona/task (developer-provided).</li>
+                        <li><strong>User Prompt:</strong> Contains the immediate instruction (user-provided).</li>
+                        <li><strong>Critical:</strong> Use the correct model chat template to avoid performance issues.</li>
+                        <li><strong>"Needle in a Haystack":</strong> Models recall info best from the beginning and end of a prompt.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Best Practices -->
+        <section id="section-3" class="py-20 border-t border-gray-700">
+            <h2 class="text-3xl font-bold text-blue-400 mb-8">2. Best Practices for Crafting Effective Prompts</h2>
+            <ol class="list-decimal list-inside space-y-6 text-gray-300 text-lg">
+                <li>
+                    <span class="font-semibold">Write Clear and Explicit Instructions</span>
+                    <ul class="list-disc list-inside ml-6 text-base mt-2 space-y-1">
+                        <li>Define ambiguity (scoring, formats).</li>
+                        <li>Use a persona to guide perspective.</li>
+                        <li>Provide examples.</li>
+                        <li>Specify the output format (e.g., JSON).</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="font-semibold">Provide Sufficient Context</span>
+                    <p class="ml-6 text-base mt-1">Mitigates hallucinations by giving the model the necessary info to work with.</p>
+                </li>
+                <li>
+                    <span class="font-semibold">Decompose Complex Tasks</span>
+                    <p class="ml-6 text-base mt-1">Chain smaller, simpler prompts. Improves performance, monitoring, and debugging.</p>
+                </li>
+                <li>
+                    <span class="font-semibold">Give the Model "Time to Think"</span>
+                    <ul class="list-disc list-inside ml-6 text-base mt-2 space-y-1">
+                        <li><strong>Chain-of-Thought (CoT):</strong> Ask the model to "think step by step."</li>
+                        <li><strong>Self-Critique:</strong> Ask the model to evaluate its own output.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <span class="font-semibold">Iterate, Evaluate, and Organize</span>
+                    <p class="ml-6 text-base mt-1">Systematically test, version prompts, and separate prompts from code for collaboration.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Section 4: Defensive Prompt Engineering - The Threat -->
+        <section id="section-4" class="py-20 border-t border-gray-700">
+             <h2 class="text-3xl font-bold text-red-400 mb-8">3. Defensive Prompt Engineering: The Threat Landscape</h2>
+             <div class="space-y-8 text-gray-300">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3">Why Defense is Necessary</h3>
+                    <p>Models can be exploited by malicious actors. Understanding the threats is the first step to building secure systems.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Main Attack Types</h3>
+                    <ul class="list-disc list-inside space-y-2 bg-gray-800 p-4 rounded-md">
+                        <li><strong class="text-yellow-400">Prompt Extraction:</strong> Stealing your proprietary system prompts.</li>
+                        <li><strong class="text-yellow-400">Jailbreaking / Prompt Injection:</strong> Tricking the model into violating its safety policies.</li>
+                        <li><strong class="text-yellow-400">Information Extraction:</strong> Forcing the model to reveal sensitive training data or context.</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold mb-2">Key Risks</h3>
+                    <p class="key-quote border-red-500">Includes remote code execution, data leaks, misinformation, social harms, and significant brand risk.</p>
+                </div>
+             </div>
+        </section>
+
+        <!-- Section 5: Defensive Engineering - Attack Vectors -->
+        <section id="section-5" class="py-20 border-t border-gray-700">
+            <h2 class="text-3xl font-bold text-red-400 mb-8">Attack Vectors in Detail</h2>
+            <div class="space-y-6 text-gray-300">
+                <div>
+                    <h3 class="text-xl font-semibold text-yellow-400">1. Prompt Extraction & Reverse Engineering</h3>
+                    <p>Deducing the system prompt by analyzing outputs or tricking the model. Treat prompts as public secrets: <span class="italic">"proprietary prompts are more of a liability than a competitive advantage"</span> (Huyen, 2025, p. 238).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-yellow-400">2. Jailbreaking & Prompt Injection</h3>
+                    <p>The most common threat. A dangerous evolution is <strong class="text-white">Indirect Prompt Injection</strong>, where malicious instructions are hidden in external data (emails, websites) that the model processes.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-yellow-400">3. Information Extraction</h3>
+                    <p>Getting the model to reveal sensitive data. The <strong class="text-white">"Divergence Attack"</strong> (e.g., "repeat 'poem' forever") shows data can be extracted even without knowing the training set.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Defensive Engineering - Defense Strategies -->
+        <section id="section-6" class="py-20 border-t border-gray-700">
+            <h2 class="text-3xl font-bold text-green-400 mb-8">Defense Strategies: A Multi-Layered Approach</h2>
+            <div class="space-y-8 text-gray-300">
+                <div>
+                    <h3 class="text-xl font-semibold">1. Model-Level Defense</h3>
+                    <p>Train models with an <strong class="text-white">instruction hierarchy</strong> (e.g., System Prompt > User Prompt > Tool Output). This can neutralize many indirect injection attacks.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">2. Prompt-Level Defense</h3>
+                    <p>Be explicit about what the model <strong class="text-white">should not do</strong>. Repeat critical instructions before and after user input to reinforce them.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">3. System-Level Defense</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Isolation:</strong> Execute generated code in a sandboxed environment (virtual machine).</li>
+                        <li><strong>Human Approval:</strong> Require confirmation for impactful actions (e.g., database writes).</li>
+                        <li><strong>Guardrails:</strong> Use input/output filters to block suspicious content or PII leakage.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+         <!-- Section 7: Activity & Discussion -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // Trigger when 40% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        document.querySelector('.nav-link.active')?.classList.remove('active');
+                        document.querySelector(`a[data-section="${id}"]`).classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Adjust scroll padding to account for sticky header height
+            const header = document.querySelector('header');
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                document.documentElement.style.scrollPaddingTop = `${headerHeight}px`;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
