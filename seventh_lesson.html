@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Finetuning</title>
+
+    <!-- Professional Typography: Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- KaTeX for Mathematical Formula Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ] });"></script>
+
+    <style>
+        /* --- FAANG-Level Frontend Best Practices ---
+         * 1. CSS Variables: For easy theming, consistency, and maintainability.
+         * 2. Modern Reset: A gentle reset for cross-browser consistency.
+         * 3. BEM-like Naming: Clear, descriptive class names.
+         * 4. Responsive Design: Mobile-first approach using media queries.
+         * 5. Accessibility (a11y): High contrast, semantic HTML, focus states.
+         * 6. Performance: Minimalistic CSS, no heavy frameworks.
+        */
+
+        :root {
+            --color-background: #f8f9fa;
+            --color-surface: #ffffff;
+            --color-primary-text: #212529;
+            --color-secondary-text: #495057;
+            --color-border: #dee2e6;
+            --color-accent: #007bff;
+            --color-accent-hover: #0056b3;
+            --color-code-bg: #e9ecef;
+
+            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-family-mono: 'Source Code Pro', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+            --spacing-unit: 8px;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-background);
+            color: var(--color-primary-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+            color: var(--color-primary-text);
+        }
+
+        .course-info {
+            font-size: 1rem;
+            color: var(--color-secondary-text);
+        }
+
+        .module {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+        }
+
+        .module__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: calc(var(--spacing-unit) * 3);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .module__title small {
+            font-weight: 400;
+            color: var(--color-secondary-text);
+            margin-left: var(--spacing-unit);
+        }
+
+        .module__content {
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+
+        .topic {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-bottom: 1px solid #eef0f2;
+        }
+
+        .topic:last-child {
+            border-bottom: none;
+        }
+
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s ease-in-out;
+        }
+
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details > summary:hover {
+            color: var(--color-accent);
+        }
+
+        .summary-icon {
+            transition: transform 0.2s ease-in-out;
+            margin-left: var(--spacing-unit);
+            width: 24px;
+            height: 24px;
+        }
+
+        details[open] .summary-icon {
+            transform: rotate(90deg);
+        }
+
+        .topic__content {
+            padding-top: calc(var(--spacing-unit) * 2);
+            padding-left: calc(var(--spacing-unit) * 1);
+            color: var(--color-secondary-text);
+        }
+
+        ul {
+            padding-left: calc(var(--spacing-unit) * 3);
+            margin-top: var(--spacing-unit);
+        }
+
+        li {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        strong {
+            color: var(--color-primary-text);
+            font-weight: 700;
+        }
+
+        .discussion, .case-study {
+            margin-top: calc(var(--spacing-unit) * 3);
+            padding: calc(var(--spacing-unit) * 2);
+            background-color: #f1f3f5;
+            border-left: 4px solid var(--color-accent);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .discussion p, .case-study p {
+            margin: 0;
+        }
+
+        code, .katex-display, .katex {
+            font-family: var(--font-family-mono);
+            background-color: var(--color-code-bg);
+            padding: 0.1em 0.3em;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .katex-display {
+            padding: calc(var(--spacing-unit) * 2);
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 6);
+            padding-top: calc(var(--spacing-unit) * 4);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-secondary-text);
+            font-size: 0.9rem;
+        }
+        
+        .objective-list li {
+            background-color: var(--color-surface);
+            padding: calc(var(--spacing-unit) * 1.5);
+            margin-bottom: var(--spacing-unit);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            list-style-type: none;
+        }
+         .objective-list {
+            padding-left: 0;
+         }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .module__title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Chapter 7: Finetuning</h1>
+            <p class="course-info">Advanced AI Engineering: Finetuning Large Language Models</p>
+            <p class="course-info">Audience: Master's Degree AI Engineering Interns</p>
+        </header>
+
+        <main>
+            <!-- Class Overview & Learning Objectives -->
+            <section class="module">
+                <h2 class="module__title">Class Overview & Learning Objectives</h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <div class="topic__content">
+                            <p>Welcome to this advanced session on finetuning. Today, we will move beyond prompt engineering to a more powerful and resource-intensive method of model adaptation. As Huyen (2025) states, "Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model... by adjusting its weights" (p. 307). This class will provide a comprehensive, top-level understanding of the finetuning landscape, from theoretical foundations to practical, real-world application.</p>
+                            <p style="margin-top: 1em;">By the end of this session, you will be able to:</p>
+                            <ul class="objective-list">
+                                <li><strong>Define</strong> and <strong>differentiate</strong> finetuning from other model adaptation techniques like prompt engineering and Retrieval-Augmented Generation (RAG).</li>
+                                <li><strong>Critically evaluate</strong> when to use finetuning versus alternative methods, based on project requirements, resources, and desired outcomes.</li>
+                                <li><strong>Analyze</strong> the primary technical challenge in finetuning—memory bottlenecks—and explain the underlying causes, including backpropagation and optimizer states.</li>
+                                <li><strong>Calculate</strong> approximate memory requirements for model inference and training.</li>
+                                <li><strong>Compare and contrast</strong> various finetuning techniques, with a deep dive into Parameter-Efficient Finetuning (PEFT), particularly LoRA.</li>
+                                <li><strong>Describe</strong> advanced, experimental techniques like model merging and their applications in multi-task learning and model upscaling.</li>
+                                <li><strong>Develop</strong> a practical workflow for a finetuning project, from selecting a base model to tuning key hyperparameters.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 1 -->
+            <section class="module">
+                <h2 class="module__title">Module 1: The Foundations of Finetuning <small>(45 minutes)</small></h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 1.1: Finetuning Overview
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <ul>
+                                    <li><strong>Core Definition:</strong> Finetuning adapts a model by modifying its weights, unlike prompt-based methods which adapt a model through "instructions, context, and tools" (Huyen, 2025, p. 307).</li>
+                                    <li><strong>Goals of Finetuning:</strong> It's not just about performance. Finetuning can "improve the model's domain-specific capabilities... strengthen its safety... [and] improve the model's instruction-following ability" (Huyen, 2025, p. 307).</li>
+                                    <li><strong>Connection to Transfer Learning:</strong> A practical application of transfer learning, which improves "sample efficiency, allowing a model to learn the same behavior with fewer examples" (Huyen, 2025, p. 309).</li>
+                                    <li><strong>Types of Finetuning:</strong> Includes supervised finetuning (labeled pairs), preference finetuning (comparative data), and continued pre-training (domain-specific raw text).</li>
+                                </ul>
+                                <div class="discussion">
+                                    <p><strong>Discussion Question:</strong> Huyen (2025) notes that OpenAI's InstructGPT paper suggested "viewing finetuning as unlocking the capabilities a model already has but that are difficult for users to access via prompting alone" (p. 309). How does this perspective shift our understanding of what we are doing when we finetune a model?</p>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 1.2: When to Finetune (and When Not to)
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p>Finetuning requires "significantly more resources, not just in data and hardware, but also in ML talent" (Huyen, 2025, p. 311). It should be attempted only after extensive experimentation with prompt-based methods.</p>
+                                <ul>
+                                    <li><strong>Reasons <em>to</em> Finetune:</strong>
+                                        <ol>
+                                            <li><strong>Improving Quality:</strong> Teach specific structures (JSON/YAML), dialects (non-standard SQL), or customer-specific patterns.</li>
+                                            <li><strong>Bias Mitigation:</strong> Use carefully curated data to counteract biases.</li>
+                                            <li><strong>Distillation:</strong> Train a smaller model to imitate a larger one for a specific task.</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>Reasons <em>Not</em> to Finetune:</strong>
+                                        <ol>
+                                            <li><strong>Performance Degradation:</strong> Can degrade performance on other tasks (an "alignment tax").</li>
+                                            <li><strong>High Cost:</strong> Requires annotated data, expertise, and ongoing maintenance.</li>
+                                            <li><strong>Rise of General Models:</strong> Capable general models may outperform domain-specific ones (e.g., GPT-4 vs. BloombergGPT).</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 1.3: Finetuning vs. RAG
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p>A critical decision point for engineers. The framework is simple: <strong>"finetuning is for form, and RAG is for facts"</strong> (Huyen, 2025, p. 317).</p>
+                                <ul>
+                                    <li><strong>Use RAG for Information-Based Failures:</strong> When the model is factually wrong or has outdated information.</li>
+                                    <li><strong>Use Finetuning for Behavioral Issues:</strong> When the output is factually correct but irrelevant, fails to follow a specific format, or needs to learn a unique style.</li>
+                                </ul>
+                                <div class="case-study">
+                                    <p><strong>Case Study:</strong> A legal tech tool must summarize new case law and format it into a proprietary XML structure. The base model hallucinates details and fails the XML format.</p>
+                                    <p><strong>Question for Interns:</strong> Based on the "form vs. facts" framework, what is the recommended development path?</p>
+                                    <p><em>(Answer: Start with RAG to fix factual inaccuracies by feeding it correct case law. Then, use finetuning to teach it the proprietary XML format).</em></p>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 2 -->
+            <section class="module">
+                <h2 class="module__title">Module 2: The Core Challenge: Memory Bottlenecks <small>(45 minutes)</small></h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 2.1: Understanding the Memory Footprint
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p>For foundation models, "memory is a bottleneck for working with them, both for inference and for finetuning" (Huyen, 2025, p. 320).</p>
+                                <ul>
+                                    <li><strong>Key Contributors:</strong> Number of parameters, number of <em>trainable</em> parameters, and numerical precision (e.g., FP32 vs. FP16).</li>
+                                    <li><strong>Backpropagation Impact:</strong> Memory usage explodes during the backward pass. For each trainable parameter, we must store its weight, gradient, and optimizer states.</li>
+                                    <li><strong>The Adam Optimizer:</strong> The most widely used optimizer for transformers. Crucially, Adam "stores two values per trainable parameter" for its states (Huyen, 2025, p. 324).</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 2.2: Memory Math: Back-of-the-Napkin Calculations
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p><strong>Memory for Inference:</strong></p>
+                                $$ \text{Memory} = (\text{Num\_Params} \times \text{Bytes\_per\_Param}) \times 1.2 $$
+                                <p><em>Example (13B model, FP16):</em> $(13 \times 10^9 \times 2 \text{ bytes}) \times 1.2 = 31.2 \text{ GB}$</p>
+                                <p><strong>Memory for Training (Full Finetuning):</strong></p>
+                                $$ \text{Training Memory} \approx \text{Weights} + \text{Gradients} + \text{Optimizer States} $$
+                                <p>Using Adam (2 states) and FP16 (2 bytes), each trainable parameter needs memory for its gradient (1 value) + optimizer states (2 values). This is $3 \text{ values} \times 2 \text{ bytes} = 6 \text{ bytes}$ per trainable parameter, in addition to the model's weights.</p>
+                                <p><em>Example (7B model, FP16):</em></p>
+                                <ul>
+                                    <li>Weights: $7\text{B} \times 2 \text{ bytes} = 14 \text{ GB}$</li>
+                                    <li>Gradients & Optimizer States: $7\text{B} \times 3 \text{ values} \times 2 \text{ bytes} = 42 \text{ GB}$</li>
+                                    <li><strong>Total (est.): $14 \text{ GB} + 42 \text{ GB} = 56 \text{ GB}$</strong></li>
+                                </ul>
+                                <p>This is why a consumer GPU with 24 GB of VRAM is insufficient.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                     <div class="topic">
+                        <details>
+                            <summary>
+                                Part 2.3: Mitigating Memory Usage: Quantization
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p>"Reducing precision, also known as quantization, is a cheap and extremely effective way to reduce a model's memory footprint" (Huyen, 2025, p. 328).</p>
+                                <ul>
+                                    <li><strong>Numerical Representations:</strong> Review of FP32, FP16, BF16, emphasizing the trade-off between <em>range</em> and <em>precision</em>.</li>
+                                    <li><strong>What is Quantization?</strong> Converting a model's values to a lower-precision format (e.g., FP16 to INT8 or INT4).</li>
+                                    <li><strong>When to Quantize:</strong>
+                                        <ul>
+                                            <li><strong>Post-Training Quantization (PTQ):</strong> Most common; a fully trained model is quantized.</li>
+                                            <li><strong>Quantization-Aware Training (QAT):</strong> Simulates low-precision behavior <em>during</em> training for a more robust model.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 3 -->
+            <section class="module">
+                <h2 class="module__title">Module 3: Finetuning Techniques in Practice <small>(60 minutes)</small></h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 3.1: Parameter-Efficient Finetuning (PEFT)
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p><strong>The PEFT Goal:</strong> "achieve performance close to that of full finetuning while using significantly fewer trainable parameters" (Huyen, 2025, p. 334).</p>
+                                <ul>
+                                    <li><strong>Two Buckets of PEFT:</strong>
+                                        <ol>
+                                            <li><strong>Adapter-Based Methods (Additive):</strong> Involve adding new, small, trainable modules to the model.</li>
+                                            <li><strong>Soft Prompt-Based Methods:</strong> Modify model input processing with special trainable tokens (continuous vectors).</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 3.2: Deep Dive into LoRA (Low-Rank Adaptation)
+                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p><strong>Conceptual Foundation:</strong> The key idea is that "while LLMs have many parameters, they have very low intrinsic dimensions" (Huyen, 2025, p. 340). LoRA exploits this by decomposing a large weight matrix update $\Delta W$ into two smaller, low-rank matrices, $A$ and $B$.</p>
+                                <p><strong>How LoRA Works:</strong></p>
+                                <ol>
+                                    <li>The original weight matrix $W$ is frozen.</li>
+                                    <li>A low-rank update $\Delta W = BA$ is created (where $B$ and $A$ are the trainable matrices).</li>
+                                    <li>The new forward pass becomes $h = W_0x + \Delta Wx = W_0x + BAx$. We only train $B$ and $A$.</li>
+                                    <li><strong>Key Benefit:</strong> The LoRA matrices "can be merged back to the original layers" after training ($W' = W_0 + BA$), meaning there is <strong>no extra inference latency</strong>.</li>
+                                </ol>
+                                <p><strong>Serving LoRA Adapters (Multi-LoRA Serving):</strong> Serve hundreds of specialized models by loading one base model and swapping tiny LoRA adapters on the fly, significantly reducing storage and cost.</p>
+                                <p><strong>Quantized LoRA (QLoRA):</strong> Further reduces memory by quantizing the base model's weights (e.g., to 4-bit) while performing the forward/backward passes in a higher precision like BF16. This allows massive models (e.g., 65B) to be finetuned on a single 48 GB GPU.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="topic">
+                        <details>
+                            <summary>
+                                Part 3.3: Experimental Frontiers: Model Merging
+                               <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p><strong>The Goal:</strong> "create a single model that provides more value than using all the constituent models separately" (Huyen, 2025, p. 347). This is different from ensembling; merging combines model <em>parameters</em>.</p>
+                                <ul>
+                                    <li><strong>Primary Approaches:</strong>
+                                        <ol>
+                                            <li><strong>Summing (Linear Combination & SLERP):</strong> Averaging weights or task vectors. Works best for models from the same base. Leads to <em>task arithmetic</em> (adding/subtracting capabilities).</li>
+                                            <li><strong>Layer Stacking (Frankenmerging):</strong> Stacking layers from different models. Often requires further finetuning.</li>
+                                            <li><strong>Concatenation:</strong> Combining LoRA adapters by concatenating their matrices.</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>Use Cases:</strong> Multi-task finetuning, federated learning, and model upscaling.</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Module 4 -->
+            <section class="module">
+                <h2 class="module__title">Module 4: Practical Finetuning Tactics & Summary <small>(30 minutes)</small></h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <details>
+                             <summary>
+                                Discussion & Walkthrough
+                               <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="topic__content">
+                                <p><strong>Choosing a Base Model & Framework:</strong></p>
+                                <ul>
+                                    <li><strong>Progression Path:</strong> Start with the cheapest model to debug code, test data on a middling model, then use the best model to push performance.</li>
+                                    <li><strong>Distillation Path:</strong> Start with the strongest model and a small dataset, use it to generate more training data, and then use that synthetic data to train a cheaper model.</li>
+                                    <li><strong>Frameworks:</strong> Ecosystem includes easy APIs, flexible frameworks like `PEFT`, `unsloth`, `LitGPT`, and distributed frameworks like `DeepSpeed`.</li>
+                                </ul>
+
+                                <p><strong>Key Hyperparameters to Tune:</strong></p>
+                                <ul>
+                                    <li><strong>Learning Rate:</strong> Step size for updates. If loss fluctuates, the rate may be too high.</li>
+                                    <li><strong>Batch Size:</strong> Number of examples per step. Use <strong>gradient accumulation</strong> to simulate a larger batch size when memory is constrained.</li>
+                                    <li><strong>Number of Epochs:</strong> Passes over the data. Monitor validation loss to prevent overfitting.</li>
+                                </ul>
+
+                                <p><strong>Final Summary:</strong></p>
+                                <ul>
+                                    <li>The primary motivation for modern finetuning is achieving strong performance on a minimal memory footprint.</li>
+                                    <li>PEFT methods (LoRA) reduce memory by minimizing trainable parameters.</li>
+                                    <li>Quantization reduces memory by using fewer bits per value.</li>
+                                    <li>LoRA's modularity is highly practical for serving multiple specialized models efficiently.</li>
+                                    <li>Approach finetuning systematically with clear goals and a solid evaluation pipeline.</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Q&A -->
+            <section class="module">
+                <h2 class="module__title">Q&A Session <small>(15 minutes)</small></h2>
+                <div class="module__content">
+                    <div class="topic">
+                        <div class="topic__content">
+                            <p>Open floor for any questions regarding the concepts, techniques, or their practical application in your internship projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+        
+        <footer>
+            <p><strong>Source:</strong> Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+
