@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Lessons - Course Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            min-height: 100vh;
+        }
+        .lesson-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.3), 0 10px 10px -5px rgba(79, 70, 229, 0.2);
+            border-color: #4f46e5;
+        }
+        .lesson-number {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-section {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1 class="text-6xl font-bold mb-6">
+            <span class="gradient-text">AI Engineering</span>
+            <br>
+            <span class="text-white">Course Materials</span>
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mb-4">
+            A comprehensive guide to building AI applications with foundation models
+        </p>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-lg px-6 py-3 mb-8 max-w-2xl">
+            <p class="text-sm text-gray-300">
+                📚 Primarily based on <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline font-semibold">AI Engineering: Building Applications with Foundation Models (1st Edition)</a> by Chip Huyen, with supplementary materials from other sources
+            </p>
+        </div>
+        <div class="flex items-center gap-4 text-gray-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <span>7 Chapters</span>
+        </div>
+    </div>
+
+    <!-- Lessons Grid -->
+    <div class="container mx-auto px-4 pb-16 max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Lesson 1 -->
+            <a href="first_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">1</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Introduction to Building AI Applications</h2>
+                    <p class="text-gray-400 mb-4">
+                        Learn the fundamentals of building AI applications with foundation models and understand the core concepts of modern AI engineering.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 2 -->
+            <a href="second_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">2</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Deconstructing the Foundation Model</h2>
+                    <p class="text-gray-400 mb-4">
+                        Dive deep into the architecture and inner workings of foundation models, understanding how they process and generate information.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 3 -->
+            <a href="third_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">3</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Evaluation Methodology</h2>
+                    <p class="text-gray-400 mb-4">
+                        Master the techniques for evaluating AI systems, including metrics, benchmarks, and best practices for assessment.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 4 -->
+            <a href="fourth_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">4</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Evaluate AI Systems</h2>
+                    <p class="text-gray-400 mb-4">
+                        Apply practical evaluation techniques to real-world AI systems and learn to measure their performance and reliability.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 5 -->
+            <a href="fifth_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">5</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Prompt Engineering</h2>
+                    <p class="text-gray-400 mb-4">
+                        Learn the fundamentals of crafting effective prompts and optimizing AI model outputs for specific tasks.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 6 -->
+            <a href="sixth_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">6</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">RAG and Agents</h2>
+                    <p class="text-gray-400 mb-4">
+                        Learn about Retrieval-Augmented Generation and AI agents, building systems that can access external knowledge and take actions.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lesson 7 -->
+            <a href="seventh_lesson.html" class="block">
+                <div class="lesson-card h-full">
+                    <div class="lesson-number">7</div>
+                    <h2 class="text-2xl font-bold mb-3 text-white">Finetuning</h2>
+                    <p class="text-gray-400 mb-4">
+                        Understand the art of finetuning foundation models for specific domains and tasks, customizing AI for your unique needs.
+                    </p>
+                    <div class="flex items-center text-indigo-400 font-semibold">
+                        <span>Start Learning</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-400 border-t border-gray-800">
+        <p class="mb-2">AI Engineering Course Materials</p>
+        <p class="text-sm mb-2">Primarily based on <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline">AI Engineering: Building Applications with Foundation Models (1st Edition)</a> by Chip Huyen, with other sources</p>
+        <p class="text-sm">© 2025 - All lessons designed for interactive learning</p>
+    </footer>
+</body>
+</html>
