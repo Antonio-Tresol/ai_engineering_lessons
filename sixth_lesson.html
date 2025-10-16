@@ -1,83 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAG and Agents - Course Material</title>
-    <link rel="stylesheet" href="/css/main.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Local Tailwind Build -->
+    <link rel="stylesheet" href="/css/main.min.css">
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
-            color: #1e293b;
-        }
-        /* Offset for fixed navbar */
-        :target {
-            scroll-margin-top: 80px;
-        }
+        /* Navigation active state */
         .nav-link {
-            transition: all 0.2s ease-in-out;
-            border-bottom: 2px solid transparent;
+            transition: color 0.3s;
         }
-        .nav-link.active, .nav-link:hover {
-            color: #ffffff;
-            border-bottom-color: #3b82f6;
-        }
-        .content-section {
-            background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            margin-bottom: 2rem;
-            padding: 2rem;
-        }
-        .citation {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 4px;
+        .nav-link.active {
+            color: #6366f1;
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="w-full">
-    <!-- Header and Navigation Bar -->
-    <header id="navbar" class="bg-slate-800 text-slate-300 shadow-lg sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<body class="bg-gray-900 text-gray-200 font-sans">
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <h1 class="text-xl font-bold text-white">RAG & Agents</h1>
-                </div>
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#rag" class="nav-link px-3 py-2 rounded-md text-sm font-medium">RAG</a>
-                        <a href="#agents" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Agents</a>
-                        <a href="#protocols" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Protocols</a>
-                        <a href="#references" class="nav-link px-3 py-2 rounded-md text-sm font-medium">References</a>
-                    </div>
-                </nav>
-                <!-- Mobile Menu Button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button id="mobile-menu-button" type="button" class="bg-slate-700 inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                <a href="index.html" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">AI Engineering</a>
+                <div class="flex items-center space-x-4 md:space-x-8 text-sm md:text-base">
+                    <a href="#rag" class="nav-link text-gray-400 hover:text-white">RAG</a>
+                    <a href="#agents" class="nav-link text-gray-400 hover:text-white">Agents</a>
+                    <a href="#protocols" class="nav-link text-gray-400 hover:text-white">Protocols</a>
+                    <a href="#references" class="nav-link text-gray-400 hover:text-white">References</a>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#rag" class="nav-link block px-3 py-2 rounded-md text-base font-medium">RAG</a>
-                <a href="#agents" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Agents</a>
-                <a href="#protocols" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Protocols</a>
-                <a href="#references" class="nav-link block px-3 py-2 rounded-md text-base font-medium">References</a>
-            </div>
-        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center py-20 bg-gray-900">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">RAG & Agents</h1>
+        <p class="mt-4 text-lg text-gray-400">AI Engineering Chapter 6 by Huyen (2025)</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     </header>
 
     <!-- Main Content -->
@@ -100,7 +71,7 @@
                 <p class="citation mt-2">(Lewis et al., 2020; Huyen, 2025, p. 255)</p>
             </div>
             
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">RAG Architecture</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">RAG Architecture</h3>
             <p class="mb-4">A standard RAG system consists of two primary components:</p>
             <ul class="space-y-4">
                 <li><strong class="text-indigo-600">1. Retriever:</strong> Fetches information from an external source (e.g., a document database). Its functions include <strong>Indexing</strong> (structuring data) and <strong>Querying</strong> (finding relevant chunks).</li>
@@ -108,15 +79,15 @@
             </ul>
             <p class="citation mt-4">(Huyen, 2025, p. 256)</p>
 
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Retrieval Algorithms</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Retrieval Algorithms</h3>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="p-4 border border-slate-200 rounded-lg">
+                <div class="p-4 border border-gray-700 rounded-lg">
                     <h4 class="font-bold text-xl mb-2 text-teal-700">Term-Based (Sparse) Retrieval</h4>
                     <p class="mb-2">Matches documents based on keywords (e.g., TF-IDF, Okapi BM25).</p>
                     <p><strong class="text-green-600">Pros:</strong> Fast, inexpensive. <strong class="text-red-600">Cons:</strong> Lacks semantic understanding.</p>
                     <p class="citation mt-2">(Robertson & Zaragoza, 2009, as cited in Huyen, 2025, p. 260)</p>
                 </div>
-                <div class="p-4 border border-slate-200 rounded-lg">
+                <div class="p-4 border border-gray-700 rounded-lg">
                     <h4 class="font-bold text-xl mb-2 text-purple-700">Embedding-Based (Dense) Retrieval</h4>
                     <p class="mb-2">Ranks documents based on meaning similarity using vector embeddings.</p>
                     <p><strong class="text-green-600">Pros:</strong> Captures semantic nuance. <strong class="text-red-600">Cons:</strong> More expensive and slower.</p>
@@ -126,7 +97,7 @@
             <p class="mt-4"><strong>Hybrid Search</strong> combines both methods to balance speed, cost, and accuracy, often using a term-based search followed by an embedding-based reranker.</p>
             <p class="citation mt-2">(Cormack et al., 2009, as cited in Huyen, 2025, p. 267)</p>
 
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Retrieval Optimization & Scope</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Retrieval Optimization & Scope</h3>
             <ul class="list-disc list-inside space-y-2">
                 <li><strong>Chunking Strategy:</strong> How documents are split impacts quality. Overlapping chunks is recommended.</li>
                 <li><strong>Query Rewriting:</strong> Using an LLM to reformulate ambiguous queries.</li>
@@ -142,7 +113,7 @@
             <p class="text-lg mb-4">An agent is an entity that can perceive its environment and act upon it. In AI engineering, an agent uses an LLM as its "brain" to process information, create a plan, and execute actions using a set of available <strong class="text-rose-600">tools</strong>.</p>
             <p class="citation">(Russell & Norvig, 1995, as cited in Huyen, 2025, p. 275)</p>
             
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Agent Planning & Execution</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Agent Planning & Execution</h3>
             <ul class="list-disc list-inside space-y-2">
                 <li><strong>Decoupling Planning and Execution:</strong> Best practice is to generate a plan, validate it (with AI or human oversight), and then execute it to prevent wasted resources.</li>
                 <li><strong>Reflection and Error Correction:</strong> High-performing agents use frameworks like <strong class="font-semibold">ReAct (Reason + Act)</strong> to iterate through a cycle of Thought, Action, and Observation, allowing them to learn from outcomes.</li>
@@ -150,17 +121,17 @@
             </ul>
              <p class="citation mt-2">(Huyen, 2025, pp. 282, 291, 293)</p>
             
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Advanced Agent Architectures 🏗️</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Advanced Agent Architectures 🏗️</h3>
             <p class="mb-4">Effective agents often use complex patterns to decompose tasks:</p>
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="p-3 bg-slate-50 rounded-lg border"><strong>Prompt Chaining:</strong> A linear sequence of LLM calls.</div>
-                <div class="p-3 bg-slate-50 rounded-lg border"><strong>Routing:</strong> An initial LLM call to classify intent and direct the query.</div>
-                <div class="p-3 bg-slate-50 rounded-lg border"><strong>Evaluator-Optimizer Loop:</strong> A generator LLM and an evaluator LLM work in a feedback loop.</div>
-                <div class="p-3 bg-slate-50 rounded-lg border"><strong>Orchestrator-Workers:</strong> A central LLM delegates sub-tasks to specialized worker LLMs.</div>
+                <div class="p-3 bg-gray-900 rounded-lg border"><strong>Prompt Chaining:</strong> A linear sequence of LLM calls.</div>
+                <div class="p-3 bg-gray-900 rounded-lg border"><strong>Routing:</strong> An initial LLM call to classify intent and direct the query.</div>
+                <div class="p-3 bg-gray-900 rounded-lg border"><strong>Evaluator-Optimizer Loop:</strong> A generator LLM and an evaluator LLM work in a feedback loop.</div>
+                <div class="p-3 bg-gray-900 rounded-lg border"><strong>Orchestrator-Workers:</strong> A central LLM delegates sub-tasks to specialized worker LLMs.</div>
             </div>
             <p class="citation mt-4">(Anthropic, 2024)</p>
 
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Best Practices for Tool Use</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Best Practices for Tool Use</h3>
             <ul class="list-disc list-inside space-y-2">
                 <li><strong>"Prompt Engineer" Your Tools:</strong> Tool definitions should be extremely clear, with examples and edge cases.</li>
                 <li><strong>"Poka-yoke" (Mistake-Proof) Your Tools:</strong> Design tools to make it hard for the LLM to make common errors.</li>
@@ -168,7 +139,7 @@
             </ul>
              <p class="citation mt-2">(Anthropic, 2024)</p>
 
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Memory in Agentic Systems</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Memory in Agentic Systems</h3>
             <p>Agents require robust memory to manage information. This includes <strong class="font-semibold">Internal Knowledge</strong> (from training), <strong class="font-semibold">Short-Term Memory</strong> (the context window), and <strong class="font-semibold">Long-Term Memory</strong> (external storage like a vector database).</p>
             <p class="citation mt-2">(Huyen, 2025, p. 301)</p>
         </div>
@@ -180,7 +151,7 @@
             <p class="text-lg mb-4"><strong class="text-green-600">The Solution:</strong> AI agent protocols are standardized frameworks that define the rules, formats, and procedures for structured communication.</p>
             <p class="citation">(Yang et al., 2025, pp. 1, 6)</p>
             
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">Protocol Taxonomy</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Protocol Taxonomy</h3>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
                     <h4 class="font-semibold text-blue-800">1. By Object Orientation</h4>
@@ -199,18 +170,18 @@
             </div>
             <p class="citation mt-4">(Yang et al., 2025, p. 7)</p>
 
-            <h3 class="text-2xl font-semibold text-slate-700 mt-8 mb-4">The Agent Communication Trilemma</h3>
+            <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">The Agent Communication Trilemma</h3>
             <p class="mb-4">Protocol design involves a trade-off between three competing goals:</p>
             <div class="grid sm:grid-cols-3 gap-4 text-center mt-6">
-                <div class="p-4 bg-slate-50 rounded-lg border shadow">
+                <div class="p-4 bg-gray-900 rounded-lg border shadow">
                     <h4 class="font-semibold text-xl text-slate-800">Versatility</h4>
                     <p class="mt-2 text-slate-600">Supporting diverse message types.</p>
                 </div>
-                 <div class="p-4 bg-slate-50 rounded-lg border shadow">
+                 <div class="p-4 bg-gray-900 rounded-lg border shadow">
                     <h4 class="font-semibold text-xl text-slate-800">Efficiency</h4>
                     <p class="mt-2 text-slate-600">Minimizing cost and latency.</p>
                 </div>
-                 <div class="p-4 bg-slate-50 rounded-lg border shadow">
+                 <div class="p-4 bg-gray-900 rounded-lg border shadow">
                     <h4 class="font-semibold text-xl text-slate-800">Portability</h4>
                     <p class="mt-2 text-slate-600">Ensuring the protocol is easy to implement.</p>
                 </div>
@@ -225,7 +196,7 @@
                 <p>Anthropic. (2024). <em>Building effective agents</em>. Retrieved from https://www.anthropic.com/engineering/building-effective-agents</p>
                 <p>Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>. O'Reilly Media.</p>
                 <p>Yang, Y., Chai, H., Song, Y., Qi, S., Wen, M., Li, N., Liao, J., Hu, H., Lin, J., Chang, G., Liu, W., Wen, Y., Yu, Y., & Zhang, W. (2025). <em>A survey of AI agent protocols</em>. arXiv. https://arxiv.org/abs/2504.16736v3</p>
-                <p class="mt-4 pt-4 border-t border-slate-200 text-xs text-slate-500">Additional sources cited within the primary texts include: Cormack et al. (2009), Lewis et al. (2020), Marro et al. (2024), Robertson & Zaragoza (2009), Russell & Norvig (1995), Yao et al. (2022).</p>
+                <p class="mt-4 pt-4 border-t border-gray-700 text-xs text-slate-500">Additional sources cited within the primary texts include: Cormack et al. (2009), Lewis et al. (2020), Marro et al. (2024), Robertson & Zaragoza (2009), Russell & Norvig (1995), Yao et al. (2022).</p>
             </div>
         </div>
 

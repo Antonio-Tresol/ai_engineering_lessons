@@ -236,16 +236,32 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-200 font-sans">
 
-    <div class="container">
-        <header>
-            <h1>Chapter 7: Finetuning</h1>
-            <p class="course-info">Advanced AI Engineering: Finetuning Large Language Models</p>
-            <p class="course-info">Audience: Master's Degree AI Engineering Interns</p>
-        </header>
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">AI Engineering</a>
+                <div class="flex items-center space-x-2 md:space-x-4 text-xs sm:text-sm md:text-base">
+                    <a href="#overview" class="nav-link text-gray-400 hover:text-white">Overview</a>
+                    <a href="#methods" class="nav-link text-gray-400 hover:text-white">Methods</a>
+                    <a href="#efficient" class="nav-link text-gray-400 hover:text-white">Efficient FT</a>
+                    <a href="#continual" class="nav-link text-gray-400 hover:text-white">Continual</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <main>
+    <!-- Header -->
+    <header class="text-center py-20 bg-gray-900 border-b border-gray-800">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Chapter 7: Finetuning</h1>
+        <p class="mt-4 text-lg text-gray-400">Advanced AI Engineering: Finetuning Large Language Models</p>
+        <p class="text-gray-400">AI Engineering by Huyen (2025)</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <!-- Class Overview & Learning Objectives -->
             <section class="module">
                 <h2 class="module__title">Class Overview & Learning Objectives</h2>
@@ -533,10 +549,10 @@
 
         </main>
         
-        <footer>
+        <footer class="text-center py-8 text-gray-400 border-t border-gray-800 mt-12">
             <p><strong>Source:</strong> Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>.</p>
         </footer>
-    </div>
+    </main>
 
     <!-- Shared utilities -->
     <script src="/js/utils.js"></script>

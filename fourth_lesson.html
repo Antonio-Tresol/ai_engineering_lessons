@@ -1,74 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluate AI Systems</title>
-    <link rel="stylesheet" href="/css/main.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Local Tailwind Build -->
+    <link rel="stylesheet" href="/css/main.min.css">
+    
     <style>
-        :root {
-            --accent-color: #60a5fa;
-            --background-color: #030712;
-            --content-bg-color: #111827;
-            --border-color: #374151;
-            --text-primary: #ffffff;
-            --text-secondary: #9ca3af;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-color);
-            color: #d1d5db;
-        }
-        .main-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .main-content::-webkit-scrollbar-track {
-            background: var(--content-bg-color);
-        }
-        .main-content::-webkit-scrollbar-thumb {
-            background-color: var(--border-color);
-            border-radius: 10px;
-        }
-        .section-title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            max-width: 80ch;
-        }
+        /* Navigation active state */
         .nav-link {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: background-color 0.2s, color 0.2s;
-            border-left: 3px solid transparent;
-        }
-        .nav-link:hover {
-            background-color: rgba(96, 165, 250, 0.1);
-            color: var(--text-primary);
+            transition: color 0.3s;
         }
         .nav-link.active {
-            color: var(--accent-color);
-            font-weight: 600;
-            border-left-color: var(--accent-color);
-            background-color: rgba(96, 165, 250, 0.05);
-        }
-        .highlight {
-            color: var(--accent-color);
+            color: #6366f1;
             font-weight: 600;
         }
         .critical-note {
@@ -98,33 +49,36 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-gray-900 text-gray-200 font-sans">
 
-    <div class="flex min-h-screen">
-        <!-- Sidebar Navigation -->
-        <aside id="sidebar" class="w-64 flex-shrink-0 bg-gray-900/30 p-4 fixed lg:sticky top-0 h-screen -translate-x-full lg:translate-x-0 transition-transform z-20">
-            <h1 class="text-xl font-bold text-white mb-6 px-4">Evaluation Guide</h1>
-            <nav id="desktop-nav" class="space-y-2">
-                <a href="#introduction" class="nav-link">Introduction</a>
-                <a href="#philosophy" class="nav-link">Core Philosophy</a>
-                <a href="#pillars" class="nav-link">Four Pillars of Evaluation</a>
-                <a href="#workflow" class="nav-link">Model Selection Workflow</a>
-                <a href="#step1" class="nav-link">Step 1: Build vs. Buy</a>
-                <a href="#step2" class="nav-link">Step 2: Public Benchmarks</a>
-                <a href="#step3" class="nav-link">Step 3: Custom Pipeline</a>
-                <a href="#takeaways" class="nav-link">Key Takeaways</a>
-                <a href="#reference" class="nav-link">Reference</a>
-            </nav>
-        </aside>
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">AI Engineering</a>
+                <div class="flex items-center space-x-2 md:space-x-4 text-xs sm:text-sm md:text-base overflow-x-auto">
+                    <a href="#introduction" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Intro</a>
+                    <a href="#philosophy" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Philosophy</a>
+                    <a href="#pillars" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Pillars</a>
+                    <a href="#workflow" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Workflow</a>
+                    <a href="#step1" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Build/Buy</a>
+                    <a href="#step2" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Benchmarks</a>
+                    <a href="#step3" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Pipeline</a>
+                    <a href="#takeaways" class="nav-link text-gray-400 hover:text-white whitespace-nowrap">Takeaways</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main id="main-content" class="flex-1 p-6 md:p-10 lg:p-16 bg-gray-900/50 overflow-y-auto h-screen">
-            <div class="max-w-4xl mx-auto space-y-20">
-                
-                <section id="introduction">
-                    <h1 class="text-5xl font-extrabold text-white leading-tight">Evaluating Modern AI Systems</h1>
-                    <p class="mt-4 text-xl text-gray-400">A study guide for AI Engineering Interns based on Chapter 4 of "AI Engineering".</p>
-                </section>
+    <!-- Header -->
+    <header class="text-center py-20 bg-gray-900">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Evaluating Modern AI Systems</h1>
+        <p class="mt-4 text-lg text-gray-400">AI Engineering Chapter 4 by Huyen (2025)</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="space-y-20">
 
                 <section id="philosophy">
                     <h2 class="section-title">The Core Philosophy</h2>
@@ -248,23 +202,14 @@
                 </section>
 
                 <section id="reference" class="pb-16">
-                    <h2 class="section-title">Reference</h2>
+                    <h2 class="text-3xl font-bold mb-8 text-white">Reference</h2>
                     <div class="text-center text-lg mt-8">
                         <p>The content of this guide is based on Chapter 4: Evaluate AI Systems from:</p>
                         <p class="mt-8 italic bg-gray-800 p-6 rounded-lg border border-gray-700">Huyen, C. (2025). <span class="font-semibold not-italic">AI engineering: Building applications with foundation models.</span> O'Reilly Media.</p>
                     </div>
                 </section>
             </div>
-        </main>
-    </div>
-    
-    <!-- Mobile Menu Button -->
-    <button id="menu-btn" class="lg:hidden fixed bottom-4 right-4 bg-accent-color text-white p-3 rounded-full shadow-lg z-30">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    </button>
-
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
