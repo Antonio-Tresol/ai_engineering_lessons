@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 7: Finetuning</title>
 
-    <!-- Fonts -->
+    <!-- Professional Typography: Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
@@ -15,9 +15,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
         onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ] });"></script>
-    
-    <!-- Local Tailwind Build -->
-    <link rel="stylesheet" href="/css/main.min.css">
 
     <style>
         /* --- FAANG-Level Frontend Best Practices ---
@@ -538,8 +535,6 @@
         </footer>
     </div>
 
-    <!-- Shared utilities -->
-    <script src="/js/utils.js"></script>
 </body>
 </html>
 
