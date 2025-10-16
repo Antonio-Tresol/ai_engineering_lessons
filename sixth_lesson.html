@@ -55,40 +55,40 @@
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Welcome Section -->
         <section class="content-section text-center">
-            <h2 class="text-4xl font-bold text-slate-800 mb-4">RAG and Agents</h2>
+            <h2 class="text-4xl font-bold text-white mb-4">RAG and Agents</h2>
             <p class="text-xl text-slate-600">Supporting Material for AI/ML Engineering</p>
             <p class="mt-2 text-lg text-slate-500">Based on Chapter 6 of Chip Huyen's "AI Engineering" and supplementary sources.</p>
         </section>
 
         <!-- RAG Section -->
-        <div id="rag" class="content-section">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">Retrieval-Augmented Generation (RAG)</h2>
+        <div id="rag" class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6 border-b pb-2">Retrieval-Augmented Generation (RAG)</h2>
             <p class="mb-4 text-lg">A technique that enhances a foundation model's output by first retrieving relevant information from an external data source and then providing that information as context for the generation process.</p>
             <p class="citation">(Huyen, 2025, p. 253)</p>
-            <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
-                <h3 class="font-semibold text-blue-800">Why is RAG important?</h3>
-                <p class="mt-2 text-blue-700">It's crucial for mitigating model hallucinations, which often occur when a model lacks the necessary context to answer a query accurately. RAG remains critical even as model context windows expand, because application data needs often grow faster than context limits.</p>
+            <div class="mt-6 p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg">
+                <h3 class="font-semibold text-blue-300">Why is RAG important?</h3>
+                <p class="mt-2 text-blue-200">It's crucial for mitigating model hallucinations, which often occur when a model lacks the necessary context to answer a query accurately. RAG remains critical even as model context windows expand, because application data needs often grow faster than context limits.</p>
                 <p class="citation mt-2">(Lewis et al., 2020; Huyen, 2025, p. 255)</p>
             </div>
             
             <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">RAG Architecture</h3>
             <p class="mb-4">A standard RAG system consists of two primary components:</p>
             <ul class="space-y-4">
-                <li><strong class="text-indigo-600">1. Retriever:</strong> Fetches information from an external source (e.g., a document database). Its functions include <strong>Indexing</strong> (structuring data) and <strong>Querying</strong> (finding relevant chunks).</li>
-                <li><strong class="text-indigo-600">2. Generator:</strong> An LLM that uses the original prompt plus the retrieved context to produce the final response.</li>
+                <li><strong class="text-indigo-400">1. Retriever:</strong> Fetches information from an external source (e.g., a document database). Its functions include <strong>Indexing</strong> (structuring data) and <strong>Querying</strong> (finding relevant chunks).</li>
+                <li><strong class="text-indigo-400">2. Generator:</strong> An LLM that uses the original prompt plus the retrieved context to produce the final response.</li>
             </ul>
             <p class="citation mt-4">(Huyen, 2025, p. 256)</p>
 
             <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Retrieval Algorithms</h3>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="p-4 border border-gray-700 rounded-lg">
-                    <h4 class="font-bold text-xl mb-2 text-teal-700">Term-Based (Sparse) Retrieval</h4>
+                    <h4 class="font-bold text-xl mb-2 text-teal-400">Term-Based (Sparse) Retrieval</h4>
                     <p class="mb-2">Matches documents based on keywords (e.g., TF-IDF, Okapi BM25).</p>
                     <p><strong class="text-green-600">Pros:</strong> Fast, inexpensive. <strong class="text-red-600">Cons:</strong> Lacks semantic understanding.</p>
                     <p class="citation mt-2">(Robertson & Zaragoza, 2009, as cited in Huyen, 2025, p. 260)</p>
                 </div>
                 <div class="p-4 border border-gray-700 rounded-lg">
-                    <h4 class="font-bold text-xl mb-2 text-purple-700">Embedding-Based (Dense) Retrieval</h4>
+                    <h4 class="font-bold text-xl mb-2 text-purple-400">Embedding-Based (Dense) Retrieval</h4>
                     <p class="mb-2">Ranks documents based on meaning similarity using vector embeddings.</p>
                     <p><strong class="text-green-600">Pros:</strong> Captures semantic nuance. <strong class="text-red-600">Cons:</strong> More expensive and slower.</p>
                     <p class="citation mt-2">(Huyen, 2025, p. 262)</p>
@@ -108,9 +108,9 @@
         </div>
 
         <!-- Agents Section -->
-        <div id="agents" class="content-section">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">AI Agents</h2>
-            <p class="text-lg mb-4">An agent is an entity that can perceive its environment and act upon it. In AI engineering, an agent uses an LLM as its "brain" to process information, create a plan, and execute actions using a set of available <strong class="text-rose-600">tools</strong>.</p>
+        <div id="agents" class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6 border-b pb-2">AI Agents</h2>
+            <p class="text-lg mb-4">An agent is an entity that can perceive its environment and act upon it. In AI engineering, an agent uses an LLM as its "brain" to process information, create a plan, and execute actions using a set of available <strong class="text-rose-400">tools</strong>.</p>
             <p class="citation">(Russell & Norvig, 1995, as cited in Huyen, 2025, p. 275)</p>
             
             <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Agent Planning & Execution</h3>
@@ -145,24 +145,24 @@
         </div>
         
         <!-- Protocols Section -->
-        <div id="protocols" class="content-section">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">AI Agent Protocols</h2>
+        <div id="protocols" class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6 border-b pb-2">AI Agent Protocols</h2>
             <p class="text-lg mb-4"><strong class="text-red-600">The Challenge:</strong> A lack of standardized communication methods hinders agent interoperability and scalability.</p>
             <p class="text-lg mb-4"><strong class="text-green-600">The Solution:</strong> AI agent protocols are standardized frameworks that define the rules, formats, and procedures for structured communication.</p>
             <p class="citation">(Yang et al., 2025, pp. 1, 6)</p>
             
             <h3 class="text-2xl font-semibold text-gray-300 mt-8 mb-4">Protocol Taxonomy</h3>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
-                    <h4 class="font-semibold text-blue-800">1. By Object Orientation</h4>
-                    <ul class="list-disc list-inside mt-2 text-blue-700">
+                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg">
+                    <h4 class="font-semibold text-blue-300">1. By Object Orientation</h4>
+                    <ul class="list-disc list-inside mt-2 text-blue-200">
                         <li><strong>Context-Oriented:</strong> Agent-to-resource interaction (e.g., MCP).</li>
                         <li><strong>Inter-Agent:</strong> Agent-to-agent interaction (e.g., A2A).</li>
                     </ul>
                 </div>
                  <div class="p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg">
                     <h4 class="font-semibold text-purple-800">2. By Application Scenario</h4>
-                    <ul class="list-disc list-inside mt-2 text-purple-700">
+                    <ul class="list-disc list-inside mt-2 text-purple-400">
                         <li><strong>General-Purpose:</strong> Broadly applicable.</li>
                         <li><strong>Domain-Specific:</strong> Tailored for specific contexts (e.g., robotics).</li>
                     </ul>
@@ -174,15 +174,15 @@
             <p class="mb-4">Protocol design involves a trade-off between three competing goals:</p>
             <div class="grid sm:grid-cols-3 gap-4 text-center mt-6">
                 <div class="p-4 bg-gray-900 rounded-lg border shadow">
-                    <h4 class="font-semibold text-xl text-slate-800">Versatility</h4>
+                    <h4 class="font-semibold text-xl text-white">Versatility</h4>
                     <p class="mt-2 text-slate-600">Supporting diverse message types.</p>
                 </div>
                  <div class="p-4 bg-gray-900 rounded-lg border shadow">
-                    <h4 class="font-semibold text-xl text-slate-800">Efficiency</h4>
+                    <h4 class="font-semibold text-xl text-white">Efficiency</h4>
                     <p class="mt-2 text-slate-600">Minimizing cost and latency.</p>
                 </div>
                  <div class="p-4 bg-gray-900 rounded-lg border shadow">
-                    <h4 class="font-semibold text-xl text-slate-800">Portability</h4>
+                    <h4 class="font-semibold text-xl text-white">Portability</h4>
                     <p class="mt-2 text-slate-600">Ensuring the protocol is easy to implement.</p>
                 </div>
             </div>
@@ -190,8 +190,8 @@
         </div>
 
         <!-- References Section -->
-        <div id="references" class="content-section">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6">References</h2>
+        <div id="references" class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-white mb-6">References</h2>
              <div class="text-sm space-y-3 text-left">
                 <p>Anthropic. (2024). <em>Building effective agents</em>. Retrieved from https://www.anthropic.com/engineering/building-effective-agents</p>
                 <p>Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>. O'Reilly Media.</p>

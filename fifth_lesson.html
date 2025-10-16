@@ -63,37 +63,41 @@
             </div>
         </section>
         <!-- Section 2: Introduction -->
-        <section id="section-2" class="py-20 border-t border-gray-700">
-            <h2 class="text-3xl font-bold text-blue-400 mb-8">1. Introduction: The Art and Science of Prompting</h2>
-            <div class="space-y-8 text-gray-300">
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">What is Prompt Engineering?</h3>
-                    <p class="key-quote">"Prompt engineering refers to the process of crafting an instruction that gets a model to generate the desired outcome... You can think of prompt engineering as human-to-AI communication..." (Huyen, 2025, p. 211).</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">Anatomy of a Prompt & In-Context Learning (ICL)</h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Core parts: Task description, examples, the task itself.</li>
-                        <li>ICL allows models to learn from examples in the prompt without updating weights.</li>
-                        <li>Zero-Shot vs. Few-Shot: Powerful models may need fewer examples.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">System vs. User Prompts & Context Efficiency</h3>
-                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong>System Prompt:</strong> Defines persona/task (developer-provided).</li>
-                        <li><strong>User Prompt:</strong> Contains the immediate instruction (user-provided).</li>
-                        <li><strong>Critical:</strong> Use the correct model chat template to avoid performance issues.</li>
-                        <li><strong>"Needle in a Haystack":</strong> Models recall info best from the beginning and end of a prompt.</li>
-                    </ul>
+        <section id="section-2" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">1. Introduction: The Art and Science of Prompting</h2>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 space-y-8 animated">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">What is Prompt Engineering?</h3>
+                        <p class="key-quote">"Prompt engineering refers to the process of crafting an instruction that gets a model to generate the desired outcome... You can think of prompt engineering as human-to-AI communication..." (Huyen, 2025, p. 211).</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">Anatomy of a Prompt & In-Context Learning (ICL)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li>Core parts: Task description, examples, the task itself.</li>
+                            <li>ICL allows models to learn from examples in the prompt without updating weights.</li>
+                            <li>Zero-Shot vs. Few-Shot: Powerful models may need fewer examples.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-400">System vs. User Prompts & Context Efficiency</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li><strong>System Prompt:</strong> Defines persona/task (developer-provided).</li>
+                            <li><strong>User Prompt:</strong> Contains the immediate instruction (user-provided).</li>
+                            <li><strong>Critical:</strong> Use the correct model chat template to avoid performance issues.</li>
+                            <li><strong>"Needle in a Haystack":</strong> Models recall info best from the beginning and end of a prompt.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Section 3: Best Practices -->
-        <section id="section-3" class="py-20 border-t border-gray-700">
-            <h2 class="text-3xl font-bold text-blue-400 mb-8">2. Best Practices for Crafting Effective Prompts</h2>
-            <ol class="list-decimal list-inside space-y-6 text-gray-300 text-lg">
+        <section id="section-3" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">2. Best Practices for Crafting Effective Prompts</h2>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <ol class="list-decimal list-inside space-y-6 text-gray-300 text-lg">
                 <li>
                     <span class="font-semibold">Write Clear and Explicit Instructions</span>
                     <ul class="list-disc list-inside ml-6 text-base mt-2 space-y-1">
@@ -123,35 +127,40 @@
                     <p class="ml-6 text-base mt-1">Systematically test, version prompts, and separate prompts from code for collaboration.</p>
                 </li>
             </ol>
+                </div>
+            </div>
         </section>
 
         <!-- Section 4: Defensive Prompt Engineering - The Threat -->
-        <section id="section-4" class="py-20 border-t border-gray-700">
-             <h2 class="text-3xl font-bold text-red-400 mb-8">3. Defensive Prompt Engineering: The Threat Landscape</h2>
-             <div class="space-y-8 text-gray-300">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-3">Why Defense is Necessary</h3>
-                    <p>Models can be exploited by malicious actors. Understanding the threats is the first step to building secure systems.</p>
+        <section id="section-4" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">3. Defensive Prompt Engineering: The Threat Landscape</h2>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 space-y-8 animated">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 text-red-400">Why Defense is Necessary</h3>
+                        <p class="text-gray-300">Models can be exploited by malicious actors. Understanding the threats is the first step to building secure systems.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-red-400">Main Attack Types</h3>
+                        <ul class="list-disc list-inside space-y-2 bg-gray-900 p-4 rounded-md text-gray-300">
+                            <li><strong class="text-yellow-400">Prompt Extraction:</strong> Stealing your proprietary system prompts.</li>
+                            <li><strong class="text-yellow-400">Jailbreaking / Prompt Injection:</strong> Tricking the model into violating its safety policies.</li>
+                            <li><strong class="text-yellow-400">Information Extraction:</strong> Forcing the model to reveal sensitive training data or context.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-red-400">Key Risks</h3>
+                        <p class="key-quote border-red-500">Includes remote code execution, data leaks, misinformation, social harms, and significant brand risk.</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">Main Attack Types</h3>
-                    <ul class="list-disc list-inside space-y-2 bg-gray-800 p-4 rounded-md">
-                        <li><strong class="text-yellow-400">Prompt Extraction:</strong> Stealing your proprietary system prompts.</li>
-                        <li><strong class="text-yellow-400">Jailbreaking / Prompt Injection:</strong> Tricking the model into violating its safety policies.</li>
-                        <li><strong class="text-yellow-400">Information Extraction:</strong> Forcing the model to reveal sensitive training data or context.</li>
-                    </ul>
-                </div>
-                 <div>
-                    <h3 class="text-xl font-semibold mb-2">Key Risks</h3>
-                    <p class="key-quote border-red-500">Includes remote code execution, data leaks, misinformation, social harms, and significant brand risk.</p>
-                </div>
-             </div>
+            </div>
         </section>
 
         <!-- Section 5: Defensive Engineering - Attack Vectors -->
-        <section id="section-5" class="py-20 border-t border-gray-700">
-            <h2 class="text-3xl font-bold text-red-400 mb-8">Attack Vectors in Detail</h2>
-            <div class="space-y-6 text-gray-300">
+        <section id="section-5" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Attack Vectors in Detail</h2>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 space-y-6 text-gray-300 animated">
                 <div>
                     <h3 class="text-xl font-semibold text-yellow-400">1. Prompt Extraction & Reverse Engineering</h3>
                     <p>Deducing the system prompt by analyzing outputs or tricking the model. Treat prompts as public secrets: <span class="italic">"proprietary prompts are more of a liability than a competitive advantage"</span> (Huyen, 2025, p. 238).</p>
@@ -164,33 +173,34 @@
                     <h3 class="text-xl font-semibold text-yellow-400">3. Information Extraction</h3>
                     <p>Getting the model to reveal sensitive data. The <strong class="text-white">"Divergence Attack"</strong> (e.g., "repeat 'poem' forever") shows data can be extracted even without knowing the training set.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Section 6: Defensive Engineering - Defense Strategies -->
-        <section id="section-6" class="py-20 border-t border-gray-700">
-            <h2 class="text-3xl font-bold text-green-400 mb-8">Defense Strategies: A Multi-Layered Approach</h2>
-            <div class="space-y-8 text-gray-300">
-                <div>
-                    <h3 class="text-xl font-semibold">1. Model-Level Defense</h3>
-                    <p>Train models with an <strong class="text-white">instruction hierarchy</strong> (e.g., System Prompt > User Prompt > Tool Output). This can neutralize many indirect injection attacks.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold">2. Prompt-Level Defense</h3>
-                    <p>Be explicit about what the model <strong class="text-white">should not do</strong>. Repeat critical instructions before and after user input to reinforce them.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold">3. System-Level Defense</h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Isolation:</strong> Execute generated code in a sandboxed environment (virtual machine).</li>
-                        <li><strong>Human Approval:</strong> Require confirmation for impactful actions (e.g., database writes).</li>
-                        <li><strong>Guardrails:</strong> Use input/output filters to block suspicious content or PII leakage.</li>
-                    </ul>
                 </div>
             </div>
         </section>
 
-         <!-- Section 7: Activity & Discussion -->
+        <!-- Section 6: Defense Strategies -->
+        <section id="section-6" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Defense Strategies: A Multi-Layered Approach</h2>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 space-y-8 text-gray-300 animated">
+                    <div>
+                        <h3 class="text-xl font-semibold text-green-400">1. Model-Level Defense</h3>
+                        <p>Train models with an <strong class="text-white">instruction hierarchy</strong> (e.g., System Prompt > User Prompt > Tool Output). This can neutralize many indirect injection attacks.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-green-400">2. Prompt-Level Defense</h3>
+                        <p>Be explicit about what the model <strong class="text-white">should not do</strong>. Repeat critical instructions before and after user input to reinforce them.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-green-400">3. System-Level Defense</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Isolation:</strong> Execute generated code in a sandboxed environment (virtual machine).</li>
+                            <li><strong>Human Approval:</strong> Require confirmation for impactful actions (e.g., database writes).</li>
+                            <li><strong>Guardrails:</strong> Use input/output filters to block suspicious content or PII leakage.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
