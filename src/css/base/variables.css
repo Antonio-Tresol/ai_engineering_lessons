@@ -1,0 +1,10 @@
+:root {
+  /* Design tokens - mostly using Tailwind, these are for edge cases */
+  --transition-speed: 300ms;
+  --transition-timing: ease-in-out;
+}
+
+/* Dark theme adjustments (if needed beyond Tailwind) */
+.dark {
+  color-scheme: dark;
+}

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theming */
+@import './base/variables.css';
+
+/* Custom animations */
+@import './components/animations.css';
+
+/* Scroll behavior */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
