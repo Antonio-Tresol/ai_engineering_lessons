@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 3: Evaluation Methodology</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Local Tailwind Build -->
+    <link rel="stylesheet" href="/css/main.min.css">
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .module-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .interactive-section {
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            background-color: #f8fafc;
-        }
+        /* Interactive component styles */
         .btn {
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
@@ -40,11 +30,11 @@
             background-color: #4338ca;
         }
         .btn-secondary {
-            background-color: #e5e7eb;
-            color: #374151;
+            background-color: #374151;
+            color: #e5e7eb;
         }
         .btn-secondary:hover {
-            background-color: #d1d5db;
+            background-color: #4b5563;
         }
         .feedback {
             padding: 0.75rem;
@@ -53,14 +43,14 @@
             font-size: 0.875rem;
         }
         .feedback-correct {
-            background-color: #dcfce7;
-            color: #166534;
-            border: 1px solid #86efac;
+            background-color: #064e3b;
+            color: #a7f3d0;
+            border: 1px solid #10b981;
         }
         .feedback-incorrect {
-            background-color: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fca5a5;
+            background-color: #7f1d1d;
+            color: #fca5a5;
+            border: 1px solid #ef4444;
         }
         .bias-btn.active {
             background-color: #4f46e5;
@@ -72,62 +62,77 @@
             font-weight: bold;
         }
         .elo-change.positive {
-            color: #16a34a;
+            color: #10b981;
         }
         .elo-change.negative {
-            color: #dc2626;
+            color: #ef4444;
+        }
+        
+        /* Navigation active state */
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link.active {
+            color: #6366f1;
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-900 text-gray-200 font-sans">
 
-    <!-- Header and Navigation -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gray-900">Evaluation Methodology Guide</h1>
-            <div class="hidden md:flex space-x-4">
-                <a href="#module1" class="text-gray-600 hover:text-indigo-600">Imperative</a>
-                <a href="#module2" class="text-gray-600 hover:text-indigo-600">Metrics</a>
-                <a href="#module3" class="text-gray-600 hover:text-indigo-600">AI Judge</a>
-                <a href="#module4" class="text-gray-600 hover:text-indigo-600">Ranking</a>
-                <a href="#module5" class="text-gray-600 hover:text-indigo-600">Synthesis</a>
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">AI Engineering</a>
+                <div class="flex items-center space-x-4 md:space-x-6 text-xs sm:text-sm md:text-base">
+                    <a href="#module1" class="nav-link text-gray-400 hover:text-white">Imperative</a>
+                    <a href="#module2" class="nav-link text-gray-400 hover:text-white">Metrics</a>
+                    <a href="#module3" class="nav-link text-gray-400 hover:text-white">AI Judge</a>
+                    <a href="#module4" class="nav-link text-gray-400 hover:text-white">Ranking</a>
+                    <a href="#module5" class="nav-link text-gray-400 hover:text-white">Synthesis</a>
+                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center py-20 bg-gray-900">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Chapter 3: Evaluation Methodology</h1>
+        <p class="mt-4 text-lg text-gray-400">AI Engineering by Huyen (2025)</p>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-extrabold text-gray-900">Chapter 3: Evaluation Methodology</h2>
-            <p class="mt-4 text-lg text-gray-600">The challenge of selecting a model.</p>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <p class="mt-4 text-lg text-gray-400">The challenge of selecting a model.</p>
         </div>
 
         <!-- Module 1: The Evaluation Imperative -->
         <section id="module1" class="mb-16">
-            <div class="module-card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold mb-1 text-indigo-700">1. The Evaluation Imperative</h3>
-                <p class="text-gray-500 mb-6">Why Evaluation is Critical & Its Unique Challenges for Foundation Models.</p>
+            <div class="module-card bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-1 text-indigo-400">1. The Evaluation Imperative</h3>
+                <p class="text-gray-400 mb-6">Why Evaluation is Critical & Its Unique Challenges for Foundation Models.</p>
                 
                 <h4 class="font-semibold text-lg mb-4">High-Stakes AI Failures</h4>
                 <div class="grid md:grid-cols-2 gap-4 mb-6">
-                    <div class="border border-red-200 bg-red-50 p-4 rounded-lg">
+                    <div class="border border-red-700 bg-red-900/20 p-4 rounded-lg">
                         <h5 class="font-bold">Air Canada's Chatbot</h5>
                         <p class="text-sm">Gave incorrect bereavement fare information, forcing the airline to honor the mistake after a lawsuit.</p>
                     </div>
-                    <div class="border border-red-200 bg-red-50 p-4 rounded-lg">
+                    <div class="border border-red-700 bg-red-900/20 p-4 rounded-lg">
                         <h5 class="font-bold">Lawyers' Hallucinated Evidence</h5>
                         <p class="text-sm">Attorneys faced sanctions for submitting legal briefs with fake case citations generated by an LLM.</p>
                     </div>
                 </div>
-                <p class="italic text-gray-700">These examples show that robust evaluation is not academic but a critical business and safety need. As noted, "figuring out evaluation can take up the majority of the development effort."</p>
+                <p class="italic text-gray-300">These examples show that robust evaluation is not academic but a critical business and safety need. As noted, "figuring out evaluation can take up the majority of the development effort."</p>
 
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Activity: Think-Pair-Share Simulation</h4>
-                    <p class="text-gray-600 mb-4">Consider an AI application you're working on. What is the biggest risk of evaluation failure? Identify one aspect of its performance that is difficult to measure with a simple number.</p>
-                    <textarea id="tps-input" class="w-full p-2 border rounded-md h-24" placeholder="Type your thoughts here..."></textarea>
+                    <p class="text-gray-400 mb-4">Consider an AI application you're working on. What is the biggest risk of evaluation failure? Identify one aspect of its performance that is difficult to measure with a simple number.</p>
+                    <textarea id="tps-input" class="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md h-24 focus:outline-none focus:border-indigo-500" placeholder="Type your thoughts here..."></textarea>
                     <button id="tps-reveal" class="btn btn-primary mt-3">Reveal Key Concepts</button>
-                    <div id="tps-concepts" class="hidden mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-md">
+                    <div id="tps-concepts" class="hidden mt-4 p-4 bg-indigo-900/20 border border-indigo-700 rounded-md">
                         <h5 class="font-bold">Potential areas to consider:</h5>
-                        <ul class="list-disc list-inside text-sm text-gray-700 mt-2">
+                        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
                             <li>**Nuanced User Satisfaction:** Is the user happy, even if the answer is technically correct but has the wrong tone?</li>
                             <li>**Factual Accuracy in Open-Ended Domains:** How do you verify facts when there's no single ground truth database? (e.g., historical analysis)</li>
                             <li>**Harmful Content Generation:** How do you measure a model's failure to AVOID generating subtle forms of bias or harmful advice?</li>
@@ -140,18 +145,18 @@
 
         <!-- Module 2: Foundational & Exact Metrics -->
         <section id="module2" class="mb-16">
-            <div class="module-card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold mb-1 text-indigo-700">2. Foundational & Exact Metrics</h3>
-                <p class="text-gray-500 mb-6">From Language Modeling Metrics to Functional Correctness.</p>
+            <div class="module-card bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-1 text-indigo-400">2. Foundational & Exact Metrics</h3>
+                <p class="text-gray-400 mb-6">From Language Modeling Metrics to Functional Correctness.</p>
                 
-                <div class="prose prose-indigo max-w-none mb-8 text-gray-700">
+                <div class="prose prose-indigo max-w-none mb-8 text-gray-300">
                     <p>This module covers the fundamentals of measurement, divided into two parts. The first part examines metrics for evaluating a core <em>language model's</em> understanding of language. The second part focuses on 'Exact Evaluation' metrics, which measure the quality of the final <em>output</em> for a specific task.</p>
                 
-                    <h4 class="text-xl font-bold mt-8 mb-4 text-gray-800">Part A: Language Modeling Metrics (The Model's Core)</h4>
+                    <h4 class="text-xl font-bold mt-8 mb-4 text-gray-200">Part A: Language Modeling Metrics (The Model's Core)</h4>
                     <p>These deep, internal training metrics are important for two reasons. First, they serve as a powerful <strong>proxy for a model's overall capability</strong>. A model with a better fundamental understanding of language will likely perform better on downstream tasks. Second, they have practical applications in <strong>data validation and cleaning</strong>.</p>
                 
                     <div class="mt-6">
-                        <h5 class="text-lg font-semibold text-gray-800">1. Entropy: Measuring Uncertainty in Data</h5>
+                        <h5 class="text-lg font-semibold text-gray-200">1. Entropy: Measuring Uncertainty in Data</h5>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> Entropy is not a measure of the model, but of the <strong>data itself</strong>. It quantifies the average amount of surprise or uncertainty inherent in the language.</li>
                             <li><strong>How It Works:</strong> It answers the question: "On average, how much new information does each new word (or token) give me?"</li>
@@ -160,7 +165,7 @@
                     </div>
                 
                     <div class="mt-6">
-                        <h5 class="text-lg font-semibold text-gray-800">2. Cross-Entropy: Measuring a Model's "Surprise"</h5>
+                        <h5 class="text-lg font-semibold text-gray-200">2. Cross-Entropy: Measuring a Model's "Surprise"</h5>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> If entropy measures the data's inherent uncertainty, cross-entropy measures <strong>how surprised our model is by that data</strong>. A lower cross-entropy means the model is less surprised, indicating it has learned the patterns in the data well.</li>
                             <li><strong>How It Works:</strong> It can be thought of as `Model's Cross Entropy = Data's Inherent Entropy + The Model's Error`. Training a model aims to minimize this error.</li>
@@ -169,7 +174,7 @@
                     </div>
                     
                     <div class="mt-6">
-                        <h5 class="text-lg font-semibold text-gray-800">3. Perplexity (PPL): The Engineer's Go-To Metric</h5>
+                        <h5 class="text-lg font-semibold text-gray-200">3. Perplexity (PPL): The Engineer's Go-To Metric</h5>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> The exponential of cross-entropy, it can be thought of as the <strong>effective number of choices the model is considering for the next token</strong>. A perplexity of 10 means the model is as uncertain as if it were choosing between 10 equally likely words.</li>
                             <li><strong>Practical Use Cases for Engineers:</strong>
@@ -183,13 +188,13 @@
                         </ul>
                     </div>
                 
-                    <hr class="my-8 border-gray-200">
+                    <hr class="my-8 border-gray-700">
                 
-                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-800">Part B: Exact Evaluation Metrics (The Application's Output)</h4>
+                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-200">Part B: Exact Evaluation Metrics (The Application's Output)</h4>
                     <p>Exact evaluation provides a clear, unambiguous, and objective judgment of a model's output.</p>
                 
                     <div class="mt-6">
-                        <h5 class="text-lg font-semibold text-gray-800">1. Functional Correctness: The Gold Standard</h5>
+                        <h5 class="text-lg font-semibold text-gray-200">1. Functional Correctness: The Gold Standard</h5>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> This is the ultimate goal. The metric simply asks: <strong>"Did the AI system accomplish the task it was supposed to?"</strong></li>
                             <li><strong>When to Use:</strong> This is the preferred method whenever the output's correctness can be automatically and programmatically verified.</li>
@@ -198,16 +203,16 @@
                     </div>
                 
                     <div class="mt-6">
-                        <h5 class="text-lg font-semibold text-gray-800">2. Similarity Measurements Against Reference Data: The Next Best Thing</h5>
+                        <h5 class="text-lg font-semibold text-gray-200">2. Similarity Measurements Against Reference Data: The Next Best Thing</h5>
                         <p class="my-2">For tasks like translation or summarization, where a single 'correct' output cannot be verified by a unit test, similarity metrics are used to compare the model's output against human-created examples.</p>
                         
-                        <h6 class="font-semibold mt-4 text-gray-800">Lexical Similarity (e.g., BLEU, ROUGE)</h6>
+                        <h6 class="font-semibold mt-4 text-gray-200">Lexical Similarity (e.g., BLEU, ROUGE)</h6>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> An older approach that measures the <strong>literal, surface-level overlap of words and phrases</strong> (n-grams) between the generated text and a human-written reference text.</li>
                             <li><strong>Why It's Flawed:</strong> It's rigid, penalizes perfectly valid synonyms and paraphrasing, and is often a poor signal for true quality or correctness. OpenAI found that BLEU scores for incorrect and correct solutions were similar, proving it's not a reliable indicator.</li>
                         </ul>
                 
-                        <h6 class="font-semibold mt-4 text-gray-800">Semantic Similarity (Embedding-based)</h6>
+                        <h6 class="font-semibold mt-4 text-gray-200">Semantic Similarity (Embedding-based)</h6>
                         <ul class="list-disc list-inside mt-2 space-y-2">
                             <li><strong>Core Intuition:</strong> This is the modern, superior approach. Instead of comparing words, <strong>it compares the underlying meaning</strong>.</li>
                             <li><strong>How It Works:</strong> Both the model's output and the reference text are fed into a specialized embedding model which converts each text into a vector. We then calculate the mathematical similarity (e.g., cosine similarity) between these two vectors.</li>
@@ -220,18 +225,18 @@
 
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Interactive: Perplexity Simulator</h4>
-                    <p class="text-gray-600 mb-4">Perplexity measures how "surprised" a model is by a piece of text. Lower is better. See how it changes based on model tuning.</p>
+                    <p class="text-gray-400 mb-4">Perplexity measures how "surprised" a model is by a piece of text. Lower is better. See how it changes based on model tuning.</p>
                     
                     <div class="flex flex-wrap gap-4 items-center">
                          <div>
-                            <label for="perplexity-sentence" class="block text-sm font-medium text-gray-700">Choose a sentence:</label>
+                            <label for="perplexity-sentence" class="block text-sm font-medium text-gray-300">Choose a sentence:</label>
                             <select id="perplexity-sentence" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="standard">The sun rises in the east.</option>
                                 <option value="complex">Mechanistic interpretability seeks to reverse-engineer neural networks.</option>
                             </select>
                         </div>
                         <div>
-                            <label for="perplexity-model" class="block text-sm font-medium text-gray-700">Choose a model type:</label>
+                            <label for="perplexity-model" class="block text-sm font-medium text-gray-300">Choose a model type:</label>
                             <select id="perplexity-model" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="good">Well-Trained Base Model</option>
                                 <option value="bad">Poorly-Trained Model</option>
@@ -241,21 +246,21 @@
                     </div>
 
                     <div id="perplexity-result" class="mt-6 p-4 bg-gray-100 rounded-md text-center">
-                        <p class="text-lg">Perplexity Score: <span id="perplexity-score" class="font-bold text-2xl text-indigo-600">--</span></p>
-                        <p id="perplexity-explanation" class="text-sm text-gray-600 mt-2"></p>
+                        <p class="text-lg">Perplexity Score: <span id="perplexity-score" class="font-bold text-2xl text-indigo-400">--</span></p>
+                        <p id="perplexity-explanation" class="text-sm text-gray-400 mt-2"></p>
                     </div>
                 </div>
 
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Game: Match the Metric</h4>
-                    <p class="text-gray-600 mb-4">Drag the use case to the correct evaluation metric.</p>
+                    <p class="text-gray-400 mb-4">Drag the use case to the correct evaluation metric.</p>
                     <div class="flex flex-col md:flex-row gap-8">
                         <div class="w-full md:w-1/2">
                             <h5 class="font-semibold mb-2">Metrics</h5>
                             <div id="metric-targets" class="space-y-3">
-                                <div class="p-4 border rounded-lg bg-white" data-metric="correctness"><span class="font-bold">Functional Correctness</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
-                                <div class="p-4 border rounded-lg bg-white" data-metric="lexical"><span class="font-bold">Lexical Similarity (BLEU/ROUGE)</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
-                                <div class="p-4 border rounded-lg bg-white" data-metric="semantic"><span class="font-bold">Semantic Similarity</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-metric="correctness"><span class="font-bold">Functional Correctness</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-metric="lexical"><span class="font-bold">Lexical Similarity (BLEU/ROUGE)</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-metric="semantic"><span class="font-bold">Semantic Similarity</span><div class="drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
                             </div>
                         </div>
                         <div class="w-full md:w-1/2">
@@ -274,12 +279,12 @@
 
         <!-- Module 3: The Subjective Judge: Using AI -->
         <section id="module3" class="mb-16">
-            <div class="module-card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold mb-1 text-indigo-700">3. The Subjective Judge: Using AI</h3>
-                <p class="text-gray-500 mb-6">Why, How, and its Limitations, Biases, and Specialized Judges.</p>
+            <div class="module-card bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-1 text-indigo-400">3. The Subjective Judge: Using AI</h3>
+                <p class="text-gray-400 mb-6">Why, How, and its Limitations, Biases, and Specialized Judges.</p>
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Interactive: AI Judge Bias Explorer</h4>
-                    <p class="text-gray-600 mb-4">See how different biases can lead an AI Judge to the wrong conclusion. Select a bias and see how it evaluates the two responses below.</p>
+                    <p class="text-gray-400 mb-4">See how different biases can lead an AI Judge to the wrong conclusion. Select a bias and see how it evaluates the two responses below.</p>
                     <p class="mb-3"><span class="font-semibold">Prompt:</span> "Summarize the concept of photosynthesis in one sentence."</p>
 
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
@@ -294,7 +299,7 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Select a Judge Bias:</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Select a Judge Bias:</label>
                         <div class="flex flex-wrap gap-2">
                             <button class="bias-btn btn btn-secondary" data-bias="none">Unbiased</button>
                             <button class="bias-btn btn btn-secondary" data-bias="verbosity">Verbosity Bias</button>
@@ -303,7 +308,7 @@
                         </div>
                     </div>
                     
-                    <div id="bias-explanation" class="p-4 bg-indigo-50 border border-indigo-200 rounded-md">
+                    <div id="bias-explanation" class="p-4 bg-indigo-900/20 border border-indigo-700 rounded-md">
                         <h5 class="font-bold">Judge's Verdict:</h5>
                         <p id="bias-verdict">Select a bias to see the evaluation.</p>
                         <p id="bias-reason" class="text-sm mt-2"></p>
@@ -314,14 +319,14 @@
 
         <!-- Module 4: The Competitive Arena: Ranking Models -->
         <section id="module4" class="mb-16">
-            <div class="module-card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold mb-1 text-indigo-700">4. The Competitive Arena</h3>
-                <p class="text-gray-500 mb-6">Ranking Models with Comparative Evaluation.</p>
+            <div class="module-card bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-1 text-indigo-400">4. The Competitive Arena</h3>
+                <p class="text-gray-400 mb-6">Ranking Models with Comparative Evaluation.</p>
 
-                <div class="prose prose-indigo max-w-none mb-8 text-gray-700">
+                <div class="prose prose-indigo max-w-none mb-8 text-gray-300">
                     <p>Previous modules discussed metrics that provide a concrete score for a model's performance. However, a common business question is not "What is the score of Model A?" but rather, <strong>"Is Model A better than Model B for our use case?"</strong> This leads to the critical area of ranking models through comparative evaluation.</p>
 
-                    <h4 class="text-xl font-bold mt-8 mb-4 text-gray-800">Part A: Pointwise vs. Comparative Evaluation</h4>
+                    <h4 class="text-xl font-bold mt-8 mb-4 text-gray-200">Part A: Pointwise vs. Comparative Evaluation</h4>
                     <p>The distinction between pointwise and comparative evaluation can be understood through an analogy of judging a figure skating competition.</p>
                     <ol class="list-decimal list-inside mt-2 space-y-2">
                         <li><strong>Pointwise Evaluation:</strong> In pointwise evaluation, each skater is scored individually on technical skill and artistry. The winner is the one with the highest total score. This is analogous to running a model against a benchmark like MMLU to get an accuracy score.</li>
@@ -329,32 +334,32 @@
                     </ol>
                     <p>For tasks where quality is subjective—like the creativity of a story or the helpfulness of a chatbot's response—humans find the second method much easier.</p>
 
-                    <h5 class="text-lg font-semibold mt-6 text-gray-800">How It Works: The Chatbot Arena Model</h5>
+                    <h5 class="text-lg font-semibold mt-6 text-gray-200">How It Works: The Chatbot Arena Model</h5>
                     <ul class="list-disc list-inside mt-2 space-y-2">
                         <li>This method was famously implemented by LMSYS in their Chatbot Arena. A user enters a prompt and gets responses from two anonymous models.</li>
                         <li>The user compares the two responses and votes for the better one. Only after voting are the model names revealed.</li>
                         <li>Each comparison is called a <strong>`match`</strong>. Over thousands of matches, this builds a massive dataset of pairwise preferences.</li>
                     </ul>
 
-                    <h5 class="text-lg font-semibold mt-6 text-gray-800">The Ranking Problem: From Votes to a Leaderboard</h5>
+                    <h5 class="text-lg font-semibold mt-6 text-gray-200">The Ranking Problem: From Votes to a Leaderboard</h5>
                     <ul class="list-disc list-inside mt-2 space-y-2">
                         <li>How do you turn thousands of wins and losses into a single, ranked leaderboard? A simple win-loss record isn't enough because the quality of the opponent matters.</li>
                         <li><strong>The Solution:</strong> We borrow sophisticated rating algorithms from sports and gaming, like <strong>Elo</strong>, <strong>Bradley-Terry</strong>, or <strong>TrueSkill</strong>.</li>
                         <li>These systems update a model's rating based on the outcome of a match and the rating of its opponent. Beating a highly-rated model gives you a big rating boost, while losing to a low-rated model causes a big drop. The result is a single "Elo score" that allows for a ranked leaderboard.</li>
                     </ul>
 
-                    <hr class="my-8 border-gray-200">
+                    <hr class="my-8 border-gray-700">
 
-                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-800">Part B: The Hard Engineering Problems (Challenges)</h4>
+                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-200">Part B: The Hard Engineering Problems (Challenges)</h4>
                     
-                    <h5 class="text-lg font-semibold mt-6 text-gray-800">1. Scalability & Data Intensity</h5>
+                    <h5 class="text-lg font-semibold mt-6 text-gray-200">1. Scalability & Data Intensity</h5>
                     <ul class="list-disc list-inside mt-2 space-y-2">
                         <li><strong>The `N²` Problem:</strong> The number of possible model pairs grows quadratically with the number of models. Evaluating 50 models means 1,225 pairs, which is incredibly data-intensive.</li>
                         <li><strong>The Transitivity Assumption:</strong> These algorithms assume that if A > B and B > C, then A > C. But human preference isn't always perfectly logical, which can introduce noise.</li>
                         <li><strong>Evaluating New & Private Models:</strong> Ranking a new model is costly, as it must be run against many others. Proprietary models require building an entire internal comparative framework.</li>
                     </ul>
 
-                    <h5 class="text-lg font-semibold mt-6 text-gray-800">2. Lack of Standardization & Quality Control</h5>
+                    <h5 class="text-lg font-semibold mt-6 text-gray-200">2. Lack of Standardization & Quality Control</h5>
                      <ul class="list-disc list-inside mt-2 space-y-2">
                         <li><strong>The "Garbage In, Garbage Out" Problem:</strong> While crowdsourcing captures real-world prompts, it has zero quality control.</li>
                         <li><strong>No Fact-Checking:</strong> Users might prefer a well-written but factually incorrect response.</li>
@@ -362,16 +367,16 @@
                         <li><strong>No Grounding:</strong> Prompts often lack real-world context, like a RAG system where the model must use provided documents.</li>
                     </ul>
 
-                    <h5 class="text-lg font-semibold mt-6 text-gray-800">3. The "So What?" Problem (From Comparative to Absolute Performance)</h5>
+                    <h5 class="text-lg font-semibold mt-6 text-gray-200">3. The "So What?" Problem (From Comparative to Absolute Performance)</h5>
                     <ul class="list-disc list-inside mt-2 space-y-2">
                         <li>This is the most important challenge from a business perspective. You find that Model B beats Model A with a 51% win rate. Now what?</li>
                         <li><strong>The Ambiguity:</strong> That 51% win rate doesn't tell you the <em>magnitude</em> of the improvement. It could mean Model B is slightly better than an excellent Model A, or it could mean Model B is slightly less terrible than a bad Model A.</li>
                         <li><strong>The Business Decision:</strong> If Model B costs twice as much, this evaluation isn't sufficient to determine if the performance boost is worth the cost. It tells you the direction of improvement, but not the distance.</li>
                     </ul>
                     
-                    <hr class="my-8 border-gray-200">
+                    <hr class="my-8 border-gray-700">
 
-                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-800">Part C: The Future and Its Place in Your Toolkit</h4>
+                    <h4 class="text-xl font-bold mt-6 mb-4 text-gray-200">Part C: The Future and Its Place in Your Toolkit</h4>
                     <p>Despite the challenges, this method is powerful when used correctly and is a durable component of evaluation strategy.</p>
                      <ul class="list-disc list-inside mt-2 space-y-2">
                         <li><strong>It Captures Human Preference:</strong> Ultimately, this is what we care about for many applications.</li>
@@ -386,7 +391,7 @@
 
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Interactive: Elo Rating Simulator</h4>
-                    <p class="text-gray-600 mb-4">Platforms like Chatbot Arena use the Elo rating system from chess to rank models based on head-to-head battles. You are the judge. Pick a winner and see how the Elo ratings change!</p>
+                    <p class="text-gray-400 mb-4">Platforms like Chatbot Arena use the Elo rating system from chess to rank models based on head-to-head battles. You are the judge. Pick a winner and see how the Elo ratings change!</p>
                     
                     <div class="flex flex-col md:flex-row gap-8">
                         <!-- Leaderboard -->
@@ -412,23 +417,23 @@
         
         <!-- Module 5: Synthesis & Wrap-Up -->
         <section id="module5" class="mb-16">
-            <div class="module-card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold mb-1 text-indigo-700">5. Synthesis & Wrap-Up</h3>
-                <p class="text-gray-500 mb-6">Building a Robust, Multi-faceted Evaluation Pipeline.</p>
+            <div class="module-card bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-1 text-indigo-400">5. Synthesis & Wrap-Up</h3>
+                <p class="text-gray-400 mb-6">Building a Robust, Multi-faceted Evaluation Pipeline.</p>
 
                 <div class="interactive-section">
                     <h4 class="font-semibold text-lg mb-2">Activity: Evaluation Pipeline Builder</h4>
-                    <p class="text-gray-600 mb-4">A robust strategy is a blend of techniques. For the scenario below, drag the evaluation methods into the pipeline stages based on their priority and function.</p>
-                    <p class="mb-4 p-3 bg-indigo-50 rounded-md"><span class="font-semibold">Scenario:</span> You're building a text-to-SQL chatbot for your company's sales database. It must be highly accurate, produce efficient queries, and be trusted by non-technical users.</p>
+                    <p class="text-gray-400 mb-4">A robust strategy is a blend of techniques. For the scenario below, drag the evaluation methods into the pipeline stages based on their priority and function.</p>
+                    <p class="mb-4 p-3 bg-indigo-900/20 rounded-md"><span class="font-semibold">Scenario:</span> You're building a text-to-SQL chatbot for your company's sales database. It must be highly accurate, produce efficient queries, and be trusted by non-technical users.</p>
                     
                     <div class="flex flex-col md:flex-row gap-8">
                         <!-- Pipeline Stages -->
                         <div class="w-full md:w-2/3">
                              <h5 class="font-semibold mb-2">Pipeline Stages</h5>
                             <div id="pipeline-targets" class="space-y-3">
-                                <div class="p-4 border rounded-lg bg-white" data-stage="1"><span class="font-bold">Stage 1: Core Functionality (Non-negotiable)</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
-                                <div class="p-4 border rounded-lg bg-white" data-stage="2"><span class="font-bold">Stage 2: Scalable Quality & Preference Check</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
-                                <div class="p-4 border rounded-lg bg-white" data-stage="3"><span class="font-bold">Stage 3: Gold-Standard & Sanity Check</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-stage="1"><span class="font-bold">Stage 1: Core Functionality (Non-negotiable)</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-stage="2"><span class="font-bold">Stage 2: Scalable Quality & Preference Check</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
+                                <div class="p-4 border rounded-lg bg-gray-800" data-stage="3"><span class="font-bold">Stage 3: Gold-Standard & Sanity Check</span><div class="pipeline-drop-zone min-h-[40px] bg-gray-100 rounded-md mt-1 p-2"></div></div>
                             </div>
                         </div>
 
@@ -450,10 +455,13 @@
 
     </main>
 
-    <footer class="bg-white border-t mt-12">
-        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
-            <p class="text-sm">Source: Chip Huyen, <em>AI Engineering: Building Applications with Foundation Models</em>, Chapter 3 Evaluation Methodology 2025.</p>
-        </div>
+    <footer class="bg-gray-900 py-12 text-center border-t border-gray-800">
+        <p class="text-gray-400 max-w-3xl mx-auto mb-8">
+            Source: Chip Huyen, <em>AI Engineering: Building Applications with Foundation Models</em>, Chapter 3 Evaluation Methodology 2025.
+        </p>
+        <a href="index.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+            ← Back to All Lessons
+        </a>
     </footer>
 
 <script>
@@ -652,9 +660,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             leaderboardDiv.innerHTML += `
-                <div class="p-3 bg-white border rounded-lg flex justify-between items-center">
+                <div class="p-3 bg-gray-800 border rounded-lg flex justify-between items-center">
                     <span class="font-medium">${model.name}</span>
-                    <span class="font-bold text-indigo-600">${model.rating} ${changeHtml}</span>
+                    <span class="font-bold text-indigo-400">${model.rating} ${changeHtml}</span>
                 </div>
             `;
         });
@@ -764,6 +772,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+    <!-- Shared utilities -->
+    <script src="/js/utils.js"></script>
 </body>
 </html>
 

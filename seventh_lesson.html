@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 7: Finetuning</title>
 
-    <!-- Professional Typography: Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
@@ -15,526 +15,414 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
         onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ] });"></script>
+    
+    <!-- Local Tailwind Build -->
+    <link rel="stylesheet" href="/css/main.min.css">
 
     <style>
-        /* --- FAANG-Level Frontend Best Practices ---
-         * 1. CSS Variables: For easy theming, consistency, and maintainability.
-         * 2. Modern Reset: A gentle reset for cross-browser consistency.
-         * 3. BEM-like Naming: Clear, descriptive class names.
-         * 4. Responsive Design: Mobile-first approach using media queries.
-         * 5. Accessibility (a11y): High contrast, semantic HTML, focus states.
-         * 6. Performance: Minimalistic CSS, no heavy frameworks.
-        */
-
-        :root {
-            --color-background: #f8f9fa;
-            --color-surface: #ffffff;
-            --color-primary-text: #212529;
-            --color-secondary-text: #495057;
-            --color-border: #dee2e6;
-            --color-accent: #007bff;
-            --color-accent-hover: #0056b3;
-            --color-code-bg: #e9ecef;
-
-            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-family-mono: 'Source Code Pro', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-            --spacing-unit: 8px;
-            --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        /* Navigation active state */
+        .nav-link {
+            transition: color 0.3s;
         }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-family-sans);
-            background-color: var(--color-background);
-            color: var(--color-primary-text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: calc(var(--spacing-unit) * 4);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: calc(var(--spacing-unit) * 6);
-            border-bottom: 1px solid var(--color-border);
-            padding-bottom: calc(var(--spacing-unit) * 4);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: calc(var(--spacing-unit) * 1);
-            color: var(--color-primary-text);
-        }
-
-        .course-info {
-            font-size: 1rem;
-            color: var(--color-secondary-text);
-        }
-
-        .module {
-            background-color: var(--color-surface);
-            border-radius: var(--border-radius);
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--color-border);
-        }
-
-        .module__title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            padding: calc(var(--spacing-unit) * 3);
-            border-bottom: 1px solid var(--color-border);
+        .nav-link.active {
+            color: #6366f1;
+            font-weight: 600;
         }
         
-        .module__title small {
-            font-weight: 400;
-            color: var(--color-secondary-text);
-            margin-left: var(--spacing-unit);
-        }
-
-        .module__content {
-            padding: 0 calc(var(--spacing-unit) * 3);
-        }
-
-        .topic {
-            padding: calc(var(--spacing-unit) * 3) 0;
-            border-bottom: 1px solid #eef0f2;
-        }
-
-        .topic:last-child {
-            border-bottom: none;
-        }
-
-        details > summary {
-            list-style: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: color 0.2s ease-in-out;
-        }
-
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-
-        details > summary:hover {
-            color: var(--color-accent);
-        }
-
-        .summary-icon {
-            transition: transform 0.2s ease-in-out;
-            margin-left: var(--spacing-unit);
-            width: 24px;
-            height: 24px;
-        }
-
-        details[open] .summary-icon {
-            transform: rotate(90deg);
-        }
-
-        .topic__content {
-            padding-top: calc(var(--spacing-unit) * 2);
-            padding-left: calc(var(--spacing-unit) * 1);
-            color: var(--color-secondary-text);
-        }
-
-        ul {
-            padding-left: calc(var(--spacing-unit) * 3);
-            margin-top: var(--spacing-unit);
-        }
-
-        li {
-            margin-bottom: var(--spacing-unit);
-        }
-
-        strong {
-            color: var(--color-primary-text);
-            font-weight: 700;
-        }
-
-        .discussion, .case-study {
-            margin-top: calc(var(--spacing-unit) * 3);
-            padding: calc(var(--spacing-unit) * 2);
-            background-color: #f1f3f5;
-            border-left: 4px solid var(--color-accent);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        }
-
-        .discussion p, .case-study p {
-            margin: 0;
-        }
-
-        code, .katex-display, .katex {
-            font-family: var(--font-family-mono);
-            background-color: var(--color-code-bg);
-            padding: 0.1em 0.3em;
-            border-radius: 4px;
-            font-size: 0.95em;
-        }
-
-        .katex-display {
-            padding: calc(var(--spacing-unit) * 2);
-            overflow-x: auto;
-            text-align: center;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: calc(var(--spacing-unit) * 6);
-            padding-top: calc(var(--spacing-unit) * 4);
-            border-top: 1px solid var(--color-border);
-            color: var(--color-secondary-text);
-            font-size: 0.9rem;
+        code {
+            font-family: 'Source Code Pro', monospace;
+            background-color: #111827;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: #10b981;
         }
         
-        .objective-list li {
-            background-color: var(--color-surface);
-            padding: calc(var(--spacing-unit) * 1.5);
-            margin-bottom: var(--spacing-unit);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--color-border);
-            list-style-type: none;
-        }
-         .objective-list {
-            padding-left: 0;
-         }
-
-
-        @media (max-width: 768px) {
-            .container {
-                padding: calc(var(--spacing-unit) * 2);
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            .module__title {
-                font-size: 1.25rem;
-            }
+        .katex {
+            font-size: 1.1em;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-200 font-sans">
 
-    <div class="container">
-        <header>
-            <h1>Chapter 7: Finetuning</h1>
-            <p class="course-info">Advanced AI Engineering: Finetuning Large Language Models</p>
-            <p class="course-info">Audience: Master's Degree AI Engineering Interns</p>
-        </header>
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-blue-400 transition-colors">AI Engineering</a>
+                <div class="flex items-center space-x-4 md:space-x-8 text-sm md:text-base">
+                    <a href="#overview" class="nav-link text-gray-400 hover:text-white">Overview</a>
+                    <a href="#foundations" class="nav-link text-gray-400 hover:text-white">Foundations</a>
+                    <a href="#memory" class="nav-link text-gray-400 hover:text-white">Memory</a>
+                    <a href="#techniques" class="nav-link text-gray-400 hover:text-white">Techniques</a>
+                    <a href="#practical" class="nav-link text-gray-400 hover:text-white">Practical</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <main>
-            <!-- Class Overview & Learning Objectives -->
-            <section class="module">
-                <h2 class="module__title">Class Overview & Learning Objectives</h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <div class="topic__content">
-                            <p>Welcome to this advanced session on finetuning. Today, we will move beyond prompt engineering to a more powerful and resource-intensive method of model adaptation. As Huyen (2025) states, "Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model... by adjusting its weights" (p. 307). This class will provide a comprehensive, top-level understanding of the finetuning landscape, from theoretical foundations to practical, real-world application.</p>
-                            <p style="margin-top: 1em;">By the end of this session, you will be able to:</p>
-                            <ul class="objective-list">
-                                <li><strong>Define</strong> and <strong>differentiate</strong> finetuning from other model adaptation techniques like prompt engineering and Retrieval-Augmented Generation (RAG).</li>
-                                <li><strong>Critically evaluate</strong> when to use finetuning versus alternative methods, based on project requirements, resources, and desired outcomes.</li>
-                                <li><strong>Analyze</strong> the primary technical challenge in finetuning—memory bottlenecks—and explain the underlying causes, including backpropagation and optimizer states.</li>
-                                <li><strong>Calculate</strong> approximate memory requirements for model inference and training.</li>
-                                <li><strong>Compare and contrast</strong> various finetuning techniques, with a deep dive into Parameter-Efficient Finetuning (PEFT), particularly LoRA.</li>
-                                <li><strong>Describe</strong> advanced, experimental techniques like model merging and their applications in multi-task learning and model upscaling.</li>
-                                <li><strong>Develop</strong> a practical workflow for a finetuning project, from selecting a base model to tuning key hyperparameters.</li>
+    <!-- Header -->
+    <header class="text-center py-20 bg-gray-900">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Chapter 7: Finetuning</h1>
+        <p class="mt-4 text-lg text-gray-400">Advanced Model Adaptation for Specific Tasks</p>
+        <p class="text-gray-400">AI Engineering by Huyen (2025)</p>
+    </header>
+
+    <main>
+        <!-- Section 1: Overview -->
+        <section id="overview" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Finetuning Overview</h2>
+                
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">What is Finetuning?</h3>
+                    <p class="text-gray-300 mb-4">Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model by adjusting its weights. Unlike prompt-based methods which adapt a model through instructions, context, and tools, finetuning modifies the model's parameters directly.</p>
+                    <blockquote class="border-l-4 border-blue-500 pl-6 italic text-gray-400 my-6">
+                        <p>"Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model... by adjusting its weights."</p>
+                        <footer class="text-right mt-2 text-gray-500">- Huyen (2025, p. 307)</footer>
+                    </blockquote>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">Goals of Finetuning</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-300">
+                        <li><strong class="text-white">Improve domain-specific capabilities:</strong> Enhance performance on specialized tasks or knowledge domains</li>
+                        <li><strong class="text-white">Strengthen safety:</strong> Reduce harmful or inappropriate outputs</li>
+                        <li><strong class="text-white">Improve instruction-following:</strong> Better align model behavior with user intent</li>
+                        <li><strong class="text-white">Increase sample efficiency:</strong> Learn the same behavior with fewer examples through transfer learning</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">Types of Finetuning</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-xl mb-3 text-blue-400">Supervised Finetuning</h4>
+                            <p class="text-gray-300">Uses labeled input-output pairs to teach specific behaviors</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-xl mb-3 text-purple-400">Preference Finetuning</h4>
+                            <p class="text-gray-300">Uses comparative data to align model outputs with human preferences</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-xl mb-3 text-green-400">Continued Pre-training</h4>
+                            <p class="text-gray-300">Uses domain-specific raw text to expand model knowledge</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Foundations -->
+        <section id="foundations" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Foundations of Finetuning</h2>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">When to Finetune</h3>
+                    <p class="text-gray-300 mb-6">Finetuning requires significantly more resources in data, hardware, and expertise. It should be attempted only after extensive experimentation with prompt-based methods.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-green-900/20 border border-green-700 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl mb-3 text-green-400">Reasons TO Finetune</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                <li>Improving quality for specific structures (JSON, YAML, SQL)</li>
+                                <li>Learning customer-specific patterns or dialects</li>
+                                <li>Reducing latency by using smaller models</li>
+                                <li>Lowering costs with more efficient models</li>
+                                <li>Improving privacy and data security</li>
+                                <li>Increasing control and ownership</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-900/20 border border-red-700 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl mb-3 text-red-400">When NOT to Finetune</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300">
+                                <li>Adding new knowledge (use RAG instead)</li>
+                                <li>Limited training data available</li>
+                                <li>Prompt engineering hasn't been exhausted</li>
+                                <li>Insufficient resources or expertise</li>
+                                <li>Rapid iteration required</li>
                             </ul>
                         </div>
                     </div>
+
+                    <blockquote class="border-l-4 border-blue-500 pl-6 italic text-gray-400 my-6">
+                        <p>"OpenAI's InstructGPT paper suggested viewing finetuning as unlocking the capabilities a model already has but that are difficult for users to access via prompting alone."</p>
+                        <footer class="text-right mt-2 text-gray-500">- Huyen (2025, p. 309)</footer>
+                    </blockquote>
                 </div>
-            </section>
 
-            <!-- Module 1 -->
-            <section class="module">
-                <h2 class="module__title">Module 1: The Foundations of Finetuning <small>(45 minutes)</small></h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 1.1: Finetuning Overview
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <ul>
-                                    <li><strong>Core Definition:</strong> Finetuning adapts a model by modifying its weights, unlike prompt-based methods which adapt a model through "instructions, context, and tools" (Huyen, 2025, p. 307).</li>
-                                    <li><strong>Goals of Finetuning:</strong> It's not just about performance. Finetuning can "improve the model's domain-specific capabilities... strengthen its safety... [and] improve the model's instruction-following ability" (Huyen, 2025, p. 307).</li>
-                                    <li><strong>Connection to Transfer Learning:</strong> A practical application of transfer learning, which improves "sample efficiency, allowing a model to learn the same behavior with fewer examples" (Huyen, 2025, p. 309).</li>
-                                    <li><strong>Types of Finetuning:</strong> Includes supervised finetuning (labeled pairs), preference finetuning (comparative data), and continued pre-training (domain-specific raw text).</li>
-                                </ul>
-                                <div class="discussion">
-                                    <p><strong>Discussion Question:</strong> Huyen (2025) notes that OpenAI's InstructGPT paper suggested "viewing finetuning as unlocking the capabilities a model already has but that are difficult for users to access via prompting alone" (p. 309). How does this perspective shift our understanding of what we are doing when we finetune a model?</p>
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 1.2: When to Finetune (and When Not to)
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p>Finetuning requires "significantly more resources, not just in data and hardware, but also in ML talent" (Huyen, 2025, p. 311). It should be attempted only after extensive experimentation with prompt-based methods.</p>
-                                <ul>
-                                    <li><strong>Reasons <em>to</em> Finetune:</strong>
-                                        <ol>
-                                            <li><strong>Improving Quality:</strong> Teach specific structures (JSON/YAML), dialects (non-standard SQL), or customer-specific patterns.</li>
-                                            <li><strong>Bias Mitigation:</strong> Use carefully curated data to counteract biases.</li>
-                                            <li><strong>Distillation:</strong> Train a smaller model to imitate a larger one for a specific task.</li>
-                                        </ol>
-                                    </li>
-                                    <li><strong>Reasons <em>Not</em> to Finetune:</strong>
-                                        <ol>
-                                            <li><strong>Performance Degradation:</strong> Can degrade performance on other tasks (an "alignment tax").</li>
-                                            <li><strong>High Cost:</strong> Requires annotated data, expertise, and ongoing maintenance.</li>
-                                            <li><strong>Rise of General Models:</strong> Capable general models may outperform domain-specific ones (e.g., GPT-4 vs. BloombergGPT).</li>
-                                        </ol>
-                                    </li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 1.3: Finetuning vs. RAG
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p>A critical decision point for engineers. The framework is simple: <strong>"finetuning is for form, and RAG is for facts"</strong> (Huyen, 2025, p. 317).</p>
-                                <ul>
-                                    <li><strong>Use RAG for Information-Based Failures:</strong> When the model is factually wrong or has outdated information.</li>
-                                    <li><strong>Use Finetuning for Behavioral Issues:</strong> When the output is factually correct but irrelevant, fails to follow a specific format, or needs to learn a unique style.</li>
-                                </ul>
-                                <div class="case-study">
-                                    <p><strong>Case Study:</strong> A legal tech tool must summarize new case law and format it into a proprietary XML structure. The base model hallucinates details and fails the XML format.</p>
-                                    <p><strong>Question for Interns:</strong> Based on the "form vs. facts" framework, what is the recommended development path?</p>
-                                    <p><em>(Answer: Start with RAG to fix factual inaccuracies by feeding it correct case law. Then, use finetuning to teach it the proprietary XML format).</em></p>
-                                </div>
-                            </div>
-                        </details>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">Transfer Learning Foundation</h3>
+                    <p class="text-gray-300 mb-4">Finetuning is a practical application of transfer learning, which enables models to leverage knowledge from pre-training to learn new tasks more efficiently.</p>
+                    <div class="bg-indigo-900/20 border border-indigo-700 p-6 rounded-lg">
+                        <p class="text-gray-300"><strong class="text-indigo-400">Key Benefit:</strong> Transfer learning improves sample efficiency, allowing a model to learn the same behavior with fewer examples compared to training from scratch.</p>
+                        <p class="text-gray-400 mt-2 text-sm">Reference: Huyen (2025, p. 309)</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Module 2 -->
-            <section class="module">
-                <h2 class="module__title">Module 2: The Core Challenge: Memory Bottlenecks <small>(45 minutes)</small></h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 2.1: Understanding the Memory Footprint
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p>For foundation models, "memory is a bottleneck for working with them, both for inference and for finetuning" (Huyen, 2025, p. 320).</p>
-                                <ul>
-                                    <li><strong>Key Contributors:</strong> Number of parameters, number of <em>trainable</em> parameters, and numerical precision (e.g., FP32 vs. FP16).</li>
-                                    <li><strong>Backpropagation Impact:</strong> Memory usage explodes during the backward pass. For each trainable parameter, we must store its weight, gradient, and optimizer states.</li>
-                                    <li><strong>The Adam Optimizer:</strong> The most widely used optimizer for transformers. Crucially, Adam "stores two values per trainable parameter" for its states (Huyen, 2025, p. 324).</li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 2.2: Memory Math: Back-of-the-Napkin Calculations
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p><strong>Memory for Inference:</strong></p>
-                                $$ \text{Memory} = (\text{Num\_Params} \times \text{Bytes\_per\_Param}) \times 1.2 $$
-                                <p><em>Example (13B model, FP16):</em> $(13 \times 10^9 \times 2 \text{ bytes}) \times 1.2 = 31.2 \text{ GB}$</p>
-                                <p><strong>Memory for Training (Full Finetuning):</strong></p>
-                                $$ \text{Training Memory} \approx \text{Weights} + \text{Gradients} + \text{Optimizer States} $$
-                                <p>Using Adam (2 states) and FP16 (2 bytes), each trainable parameter needs memory for its gradient (1 value) + optimizer states (2 values). This is $3 \text{ values} \times 2 \text{ bytes} = 6 \text{ bytes}$ per trainable parameter, in addition to the model's weights.</p>
-                                <p><em>Example (7B model, FP16):</em></p>
-                                <ul>
-                                    <li>Weights: $7\text{B} \times 2 \text{ bytes} = 14 \text{ GB}$</li>
-                                    <li>Gradients & Optimizer States: $7\text{B} \times 3 \text{ values} \times 2 \text{ bytes} = 42 \text{ GB}$</li>
-                                    <li><strong>Total (est.): $14 \text{ GB} + 42 \text{ GB} = 56 \text{ GB}$</strong></li>
-                                </ul>
-                                <p>This is why a consumer GPU with 24 GB of VRAM is insufficient.</p>
-                            </div>
-                        </details>
-                    </div>
+        <!-- Section 3: Memory Bottlenecks -->
+        <section id="memory" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">The Core Challenge: Memory Bottlenecks</h2>
 
-                     <div class="topic">
-                        <details>
-                            <summary>
-                                Part 2.3: Mitigating Memory Usage: Quantization
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p>"Reducing precision, also known as quantization, is a cheap and extremely effective way to reduce a model's memory footprint" (Huyen, 2025, p. 328).</p>
-                                <ul>
-                                    <li><strong>Numerical Representations:</strong> Review of FP32, FP16, BF16, emphasizing the trade-off between <em>range</em> and <em>precision</em>.</li>
-                                    <li><strong>What is Quantization?</strong> Converting a model's values to a lower-precision format (e.g., FP16 to INT8 or INT4).</li>
-                                    <li><strong>When to Quantize:</strong>
-                                        <ul>
-                                            <li><strong>Post-Training Quantization (PTQ):</strong> Most common; a fully trained model is quantized.</li>
-                                            <li><strong>Quantization-Aware Training (QAT):</strong> Simulates low-precision behavior <em>during</em> training for a more robust model.</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </details>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-red-400 mb-4">Why Memory Matters</h3>
+                    <p class="text-gray-300 mb-6">The primary technical challenge in finetuning is memory consumption. Training requires significantly more memory than inference due to:</p>
+                    <ul class="list-disc list-inside space-y-3 text-gray-300 mb-6">
+                        <li><strong class="text-white">Model weights:</strong> The parameters themselves</li>
+                        <li><strong class="text-white">Gradients:</strong> Computed during backpropagation</li>
+                        <li><strong class="text-white">Optimizer states:</strong> Adam optimizer stores momentum and variance</li>
+                        <li><strong class="text-white">Activations:</strong> Intermediate values stored for gradient computation</li>
+                    </ul>
+
+                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                        <h4 class="font-bold text-xl mb-4 text-yellow-400">Memory Calculation Example</h4>
+                        <p class="text-gray-300 mb-3">For a 7B parameter model using Adam optimizer in mixed precision (fp16):</p>
+                        <div class="font-mono text-sm space-y-2 text-gray-400">
+                            <p>• Model weights (fp16): 7B × 2 bytes = <span class="text-white">14 GB</span></p>
+                            <p>• Gradients (fp16): 7B × 2 bytes = <span class="text-white">14 GB</span></p>
+                            <p>• Optimizer states (fp32): 7B × 8 bytes = <span class="text-white">56 GB</span></p>
+                            <p class="text-white font-bold">Total: ~84 GB (minimum)</p>
+                        </div>
+                        <p class="text-gray-400 mt-4 text-sm">Note: This excludes activation memory, which can be substantial</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- Module 3 -->
-            <section class="module">
-                <h2 class="module__title">Module 3: Finetuning Techniques in Practice <small>(60 minutes)</small></h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 3.1: Parameter-Efficient Finetuning (PEFT)
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p><strong>The PEFT Goal:</strong> "achieve performance close to that of full finetuning while using significantly fewer trainable parameters" (Huyen, 2025, p. 334).</p>
-                                <ul>
-                                    <li><strong>Two Buckets of PEFT:</strong>
-                                        <ol>
-                                            <li><strong>Adapter-Based Methods (Additive):</strong> Involve adding new, small, trainable modules to the model.</li>
-                                            <li><strong>Soft Prompt-Based Methods:</strong> Modify model input processing with special trainable tokens (continuous vectors).</li>
-                                        </ol>
-                                    </li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 3.2: Deep Dive into LoRA (Low-Rank Adaptation)
-                                <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p><strong>Conceptual Foundation:</strong> The key idea is that "while LLMs have many parameters, they have very low intrinsic dimensions" (Huyen, 2025, p. 340). LoRA exploits this by decomposing a large weight matrix update $\Delta W$ into two smaller, low-rank matrices, $A$ and $B$.</p>
-                                <p><strong>How LoRA Works:</strong></p>
-                                <ol>
-                                    <li>The original weight matrix $W$ is frozen.</li>
-                                    <li>A low-rank update $\Delta W = BA$ is created (where $B$ and $A$ are the trainable matrices).</li>
-                                    <li>The new forward pass becomes $h = W_0x + \Delta Wx = W_0x + BAx$. We only train $B$ and $A$.</li>
-                                    <li><strong>Key Benefit:</strong> The LoRA matrices "can be merged back to the original layers" after training ($W' = W_0 + BA$), meaning there is <strong>no extra inference latency</strong>.</li>
-                                </ol>
-                                <p><strong>Serving LoRA Adapters (Multi-LoRA Serving):</strong> Serve hundreds of specialized models by loading one base model and swapping tiny LoRA adapters on the fly, significantly reducing storage and cost.</p>
-                                <p><strong>Quantized LoRA (QLoRA):</strong> Further reduces memory by quantizing the base model's weights (e.g., to 4-bit) while performing the forward/backward passes in a higher precision like BF16. This allows massive models (e.g., 65B) to be finetuned on a single 48 GB GPU.</p>
-                            </div>
-                        </details>
-                    </div>
-
-                    <div class="topic">
-                        <details>
-                            <summary>
-                                Part 3.3: Experimental Frontiers: Model Merging
-                               <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p><strong>The Goal:</strong> "create a single model that provides more value than using all the constituent models separately" (Huyen, 2025, p. 347). This is different from ensembling; merging combines model <em>parameters</em>.</p>
-                                <ul>
-                                    <li><strong>Primary Approaches:</strong>
-                                        <ol>
-                                            <li><strong>Summing (Linear Combination & SLERP):</strong> Averaging weights or task vectors. Works best for models from the same base. Leads to <em>task arithmetic</em> (adding/subtracting capabilities).</li>
-                                            <li><strong>Layer Stacking (Frankenmerging):</strong> Stacking layers from different models. Often requires further finetuning.</li>
-                                            <li><strong>Concatenation:</strong> Combining LoRA adapters by concatenating their matrices.</li>
-                                        </ol>
-                                    </li>
-                                    <li><strong>Use Cases:</strong> Multi-task finetuning, federated learning, and model upscaling.</li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Module 4 -->
-            <section class="module">
-                <h2 class="module__title">Module 4: Practical Finetuning Tactics & Summary <small>(30 minutes)</small></h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <details>
-                             <summary>
-                                Discussion & Walkthrough
-                               <svg class="summary-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                            </summary>
-                            <div class="topic__content">
-                                <p><strong>Choosing a Base Model & Framework:</strong></p>
-                                <ul>
-                                    <li><strong>Progression Path:</strong> Start with the cheapest model to debug code, test data on a middling model, then use the best model to push performance.</li>
-                                    <li><strong>Distillation Path:</strong> Start with the strongest model and a small dataset, use it to generate more training data, and then use that synthetic data to train a cheaper model.</li>
-                                    <li><strong>Frameworks:</strong> Ecosystem includes easy APIs, flexible frameworks like `PEFT`, `unsloth`, `LitGPT`, and distributed frameworks like `DeepSpeed`.</li>
-                                </ul>
-
-                                <p><strong>Key Hyperparameters to Tune:</strong></p>
-                                <ul>
-                                    <li><strong>Learning Rate:</strong> Step size for updates. If loss fluctuates, the rate may be too high.</li>
-                                    <li><strong>Batch Size:</strong> Number of examples per step. Use <strong>gradient accumulation</strong> to simulate a larger batch size when memory is constrained.</li>
-                                    <li><strong>Number of Epochs:</strong> Passes over the data. Monitor validation loss to prevent overfitting.</li>
-                                </ul>
-
-                                <p><strong>Final Summary:</strong></p>
-                                <ul>
-                                    <li>The primary motivation for modern finetuning is achieving strong performance on a minimal memory footprint.</li>
-                                    <li>PEFT methods (LoRA) reduce memory by minimizing trainable parameters.</li>
-                                    <li>Quantization reduces memory by using fewer bits per value.</li>
-                                    <li>LoRA's modularity is highly practical for serving multiple specialized models efficiently.</li>
-                                    <li>Approach finetuning systematically with clear goals and a solid evaluation pipeline.</li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </section>
-
-             <!-- Q&A -->
-            <section class="module">
-                <h2 class="module__title">Q&A Session <small>(15 minutes)</small></h2>
-                <div class="module__content">
-                    <div class="topic">
-                        <div class="topic__content">
-                            <p>Open floor for any questions regarding the concepts, techniques, or their practical application in your internship projects.</p>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">Memory Optimization Strategies</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-blue-400 mb-2">Gradient Checkpointing</h4>
+                            <p class="text-gray-300">Trade computation for memory by recomputing activations during backpropagation instead of storing them all</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-purple-400 mb-2">Mixed Precision Training</h4>
+                            <p class="text-gray-300">Use fp16 for most operations while maintaining fp32 for critical computations</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-green-400 mb-2">Parameter-Efficient Finetuning (PEFT)</h4>
+                            <p class="text-gray-300">Only update a small subset of parameters, dramatically reducing memory requirements</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
+        <!-- Section 4: Techniques -->
+        <section id="techniques" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Finetuning Techniques</h2>
 
-        </main>
-        
-        <footer>
-            <p><strong>Source:</strong> Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>.</p>
-        </footer>
-    </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-6">Parameter-Efficient Finetuning (PEFT)</h3>
+                    <p class="text-gray-300 mb-6">PEFT methods update only a small subset of parameters while keeping most of the pre-trained model frozen. This dramatically reduces memory requirements and training time.</p>
 
+                    <div class="bg-indigo-900/20 border border-indigo-700 p-6 rounded-lg mb-6">
+                        <h4 class="font-bold text-xl mb-4 text-indigo-300">LoRA (Low-Rank Adaptation)</h4>
+                        <p class="text-gray-300 mb-4">LoRA is the most popular PEFT method. It works by decomposing weight updates into low-rank matrices:</p>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg mb-4">
+                            <p class="text-gray-300 mb-2">Original weight update: $W' = W_0 + \Delta W$</p>
+                            <p class="text-gray-300 mb-2">LoRA decomposition: $\Delta W = BA$</p>
+                            <p class="text-gray-300 mb-4">Where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times k}$ with rank $r \ll \min(d,k)$</p>
+                            <p class="text-gray-400 text-sm">Typically, $r$ ranges from 1 to 64, resulting in massive parameter savings</p>
+                        </div>
+
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            <li><strong class="text-white">Memory Efficient:</strong> Only train and store small rank decomposition matrices</li>
+                            <li><strong class="text-white">No Inference Latency:</strong> LoRA matrices can be merged back to original layers after training</li>
+                            <li><strong class="text-white">Modular:</strong> Multiple LoRA adapters can be trained for different tasks</li>
+                            <li><strong class="text-white">Performance:</strong> Often matches full finetuning quality with <1% of trainable parameters</li>
+                        </ul>
+
+                        <blockquote class="border-l-4 border-blue-500 pl-6 italic text-gray-400 mt-6">
+                            <p>"The LoRA matrices can be merged back to the original layers after training, meaning there is no extra inference latency."</p>
+                            <footer class="text-right mt-2 text-gray-500">- Huyen (2025, p. 342)</footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-purple-400 mb-3">Other PEFT Methods</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                                <li><strong>Prefix Tuning:</strong> Add trainable prefix tokens</li>
+                                <li><strong>Adapter Layers:</strong> Insert small trainable modules</li>
+                                <li><strong>Prompt Tuning:</strong> Learn soft prompts</li>
+                                <li><strong>IA3:</strong> Learned vector scaling</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-green-400 mb-3">Choosing PEFT Rank</h4>
+                            <p class="text-gray-300 text-sm">Higher rank = more capacity but more parameters. Start small (r=8-16) and increase if needed. Most tasks work well with r=16-32.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-4">Advanced Techniques</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-xl text-blue-400 mb-3">Model Merging</h4>
+                            <p class="text-gray-300 mb-3">Combine multiple finetuned models to create a single model with multi-task capabilities. Different merging strategies include:</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                                <li><strong>Average merging:</strong> Simple parameter averaging</li>
+                                <li><strong>TIES:</strong> Trim, elect, and merge based on parameter importance</li>
+                                <li><strong>DARE:</strong> Drop and rescale to reduce interference</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl text-purple-400 mb-3">Continual Learning</h4>
+                            <p class="text-gray-300">Techniques to learn new tasks sequentially without catastrophic forgetting of previous knowledge. Important for deploying models that need to adapt over time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Practical Guide -->
+        <section id="practical" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Practical Finetuning Guide</h2>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-6">Finetuning Workflow</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-2">Select Base Model</h4>
+                                <p class="text-gray-300">Choose a pre-trained model appropriate for your task. Consider size, capabilities, and licensing.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-2">Prepare Training Data</h4>
+                                <p class="text-gray-300">Collect and format high-quality examples. Quality matters more than quantity - aim for diverse, representative samples.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-2">Configure Finetuning</h4>
+                                <p class="text-gray-300">Choose PEFT method (typically LoRA), set hyperparameters (rank, learning rate, batch size).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-2">Train and Monitor</h4>
+                                <p class="text-gray-300">Run training with validation checks. Monitor for overfitting and adjust as needed.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white mb-2">Evaluate and Iterate</h4>
+                                <p class="text-gray-300">Test on held-out data, compare to baseline, and refine based on results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 mb-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-6">Key Hyperparameters</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-blue-400 mb-3">Learning Rate</h4>
+                            <p class="text-gray-300 mb-2">Typical range: 1e-5 to 5e-4</p>
+                            <p class="text-gray-400 text-sm">Start conservative (1e-4) and adjust based on training dynamics</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-purple-400 mb-3">LoRA Rank</h4>
+                            <p class="text-gray-300 mb-2">Typical range: 8 to 64</p>
+                            <p class="text-gray-400 text-sm">Higher rank = more capacity, more parameters. Start with 16.</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-green-400 mb-3">Batch Size</h4>
+                            <p class="text-gray-300 mb-2">As large as memory allows</p>
+                            <p class="text-gray-400 text-sm">Use gradient accumulation if batch size is limited</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg text-yellow-400 mb-3">Epochs</h4>
+                            <p class="text-gray-300 mb-2">Typically 3-5 epochs</p>
+                            <p class="text-gray-400 text-sm">Monitor validation loss to avoid overfitting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-8 animated">
+                    <h3 class="text-2xl font-semibold text-indigo-400 mb-6">Best Practices</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Start with prompt engineering:</strong> Exhaust prompt-based methods before finetuning</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Quality over quantity:</strong> Better to have 100 high-quality examples than 1000 noisy ones</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Use PEFT by default:</strong> LoRA is effective for most use cases and much more efficient</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Monitor for overfitting:</strong> Use validation sets and early stopping</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Evaluate thoroughly:</strong> Test on diverse scenarios beyond training distribution</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong class="text-white">Version control:</strong> Track model checkpoints, data versions, and hyperparameters</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Takeaways -->
+        <section id="takeaways" class="min-h-screen flex flex-col justify-center items-center px-8 py-24 border-b border-gray-800">
+            <div class="max-w-5xl w-full">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center animated">Key Takeaways</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card animated" style="transition-delay: 100ms;">
+                        <p class="text-lg text-center">1. <span class="font-semibold text-indigo-400">Finetuning modifies weights:</span> Unlike prompting, it adapts the model by changing parameters</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 200ms;">
+                        <p class="text-lg text-center">2. <span class="font-semibold text-indigo-400">Memory is the bottleneck:</span> Training requires much more memory than inference</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 300ms;">
+                        <p class="text-lg text-center">3. <span class="font-semibold text-indigo-400">PEFT enables efficiency:</span> LoRA and similar methods make finetuning accessible</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 400ms;">
+                        <p class="text-lg text-center">4. <span class="font-semibold text-indigo-400">Quality matters most:</span> Focus on high-quality training data over quantity</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 500ms;">
+                        <p class="text-lg text-center">5. <span class="font-semibold text-indigo-400">Exhaust alternatives first:</span> Try prompting and RAG before finetuning</p>
+                    </div>
+                    <div class="card animated" style="transition-delay: 600ms;">
+                        <p class="text-lg text-center">6. <span class="font-semibold text-indigo-400">Evaluate thoroughly:</span> Test finetuned models on diverse scenarios</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-12 text-gray-400 border-t border-gray-800">
+        <p class="mb-8"><strong>Source:</strong> Huyen, C. (2025). <em>AI Engineering: Building Applications with Foundation Models</em>. O'Reilly Media.</p>
+        <a href="index.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+            ← Back to All Lessons
+        </a>
+    </footer>
+
+    <!-- Shared utilities -->
+    <script src="/js/utils.js"></script>
 </body>
 </html>
-

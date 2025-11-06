@@ -1,0 +1,24 @@
+{
+  "name": "ai-engineering-lessons",
+  "version": "1.0.0",
+  "description": "AI Engineering course materials with unified Tailwind design",
+  "scripts": {
+    "dev:css": "tailwindcss -i ./src/css/main.css -o ./css/main.css --watch",
+    "build:css": "NODE_ENV=production tailwindcss -i ./src/css/main.css -o ./css/main.min.css --minify",
+    "build:js": "node scripts/bundle-js.js",
+    "build": "npm run build:css && npm run build:js",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "ai",
+    "education",
+    "tailwind"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18"
+  }
+}

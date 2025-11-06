@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="dark" style="scroll-behavior: smooth;">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Engineering Lessons - Course Index</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Local Tailwind Build -->
+    <link rel="stylesheet" href="/css/main.min.css">
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827;
-            min-height: 100vh;
-        }
         .lesson-card {
             background-color: #1f2937;
             border: 1px solid #374151;
@@ -47,20 +47,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero-section {
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
     </style>
 </head>
-<body class="text-white">
+<body class="bg-gray-900 text-white font-sans min-h-screen">
     <!-- Hero Section -->
-    <div class="hero-section">
+    <div class="min-h-[50vh] flex flex-col justify-center items-center px-8 py-16 text-center">
         <h1 class="text-6xl font-bold mb-6">
             <span class="gradient-text">AI Engineering</span>
             <br>
@@ -212,5 +203,8 @@
         <p class="text-sm mb-2">Primarily based on <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 underline">AI Engineering: Building Applications with Foundation Models (1st Edition)</a> by Chip Huyen, with other sources</p>
         <p class="text-sm">© 2025 - All lessons designed for interactive learning</p>
     </footer>
+    
+    <!-- JavaScript utilities -->
+    <script src="/js/utils.js"></script>
 </body>
 </html>
